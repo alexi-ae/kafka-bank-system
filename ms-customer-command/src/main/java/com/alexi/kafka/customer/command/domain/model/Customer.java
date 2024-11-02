@@ -27,6 +27,8 @@ public class Customer {
 
     private Contact contact;
 
+    private PersonalInfo personalInfo;
+
     private Document document;
 
     private List<Files> files;

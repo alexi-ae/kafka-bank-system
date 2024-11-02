@@ -2,6 +2,7 @@ package com.alexi.kafka.customer.command.adapters.in.web;
 
 import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
 import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
+import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
 import com.alexi.kafka.customer.command.application.command.CreateUserCommand;
 import com.alexi.kafka.customer.command.application.facade.OnboardingFacade;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
@@ -36,5 +37,10 @@ public class OnboardingController {
         return onboardingFacade.contactValidate(request, customerId);
     }
 
+    @PostMapping("/personal-info")
+    public OnbResponseDto personalInfo(@RequestBody CreatePersonalInfoCommand request,
+                                       @RequestAttribute("customerId") long customerId) {
+        return onboardingFacade.personalInfo(request, customerId);
+    }
 
 }

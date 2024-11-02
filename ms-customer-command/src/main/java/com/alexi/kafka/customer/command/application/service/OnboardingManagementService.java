@@ -2,6 +2,7 @@ package com.alexi.kafka.customer.command.application.service;
 
 import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
 import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
+import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
 import com.alexi.kafka.customer.command.application.mapper.ContactMapper;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
@@ -57,6 +58,15 @@ public class OnboardingManagementService implements OnboardingService {
         contactPersistencePort.create(contact);
         customerPersistencePort.updateNextState(customer.getId(), OnboardingStatus.PERSONAL_INFO.name());
         return OnbResponseDto.builder().nextState(OnboardingStatus.PERSONAL_INFO.name()).build();
+    }
+
+    @Override
+    public OnbResponseDto personalInfo(CreatePersonalInfoCommand request, long customerId) {
+        Customer customer = customerPersistencePort.findById(customerId);
+        customer = contactMapper.fromPersonalInfo(customer, request);
+        customer.setNextState(OnboardingStatus.IDENTITY_INFO);
+        customer = customerPersistencePort.update(customer);
+        return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
     }
 
     private boolean validatePhoneNumber(Contact contact, String code) {

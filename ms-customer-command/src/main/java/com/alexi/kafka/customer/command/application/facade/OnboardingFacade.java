@@ -2,6 +2,7 @@ package com.alexi.kafka.customer.command.application.facade;
 
 import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
 import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
+import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
 import com.alexi.kafka.customer.command.application.command.CreateUserCommand;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.application.usercase.UserService;
@@ -16,7 +17,7 @@ public class OnboardingFacade {
     private UserService userService;
 
     @Autowired
-    private OnboardingService customerService;
+    private OnboardingService onboardingService;
 
     public void register(CreateUserCommand request) {
         userService.register(request);
@@ -24,10 +25,14 @@ public class OnboardingFacade {
 
     public OnbResponseDto contact(CreateContactCommand request, long customerId) {
 
-        return customerService.saveContact(request, customerId);
+        return onboardingService.saveContact(request, customerId);
     }
 
     public OnbResponseDto contactValidate(ContactValidateCommand request, long customerId) {
-        return customerService.contactValidate(request, customerId);
+        return onboardingService.contactValidate(request, customerId);
+    }
+
+    public OnbResponseDto personalInfo(CreatePersonalInfoCommand request, long customerId) {
+        return onboardingService.personalInfo(request, customerId);
     }
 }

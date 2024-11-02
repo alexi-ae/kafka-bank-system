@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class OnbResponseDto {
 
-    private String nextStep;
+    private String nextState;
     private String token;
 }

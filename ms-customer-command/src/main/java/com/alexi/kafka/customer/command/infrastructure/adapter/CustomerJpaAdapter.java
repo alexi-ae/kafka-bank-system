@@ -40,4 +40,9 @@ public class CustomerJpaAdapter implements CustomerPersistencePort {
         CustomerEntity entity = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException());
         return customerEntityMapper.toModel(entity);
     }
+
+    @Override
+    public boolean updateNextState(long customerId, String nextState) {
+        return customerRepository.updateNextState(customerId, nextState) == 1;
+    }
 }

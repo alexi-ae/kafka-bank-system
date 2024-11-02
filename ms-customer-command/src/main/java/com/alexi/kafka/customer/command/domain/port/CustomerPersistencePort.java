@@ -11,4 +11,6 @@ public interface CustomerPersistencePort {
     boolean existsByEmail(String email);
 
     Customer findById(long customerId);
+
+    boolean updateNextState(long customerId, String nextState);
 }

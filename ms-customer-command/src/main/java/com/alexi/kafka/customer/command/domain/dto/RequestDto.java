@@ -10,5 +10,5 @@ import lombok.*;
 public class RequestDto {
     private String jwttoken;
 
-    private String nextStep;
+    private String nextState;
 }

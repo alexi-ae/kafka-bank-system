@@ -40,7 +40,7 @@ public class AuthenticationManagementService implements AuthenticationService {
         String token = jwtService.generateToken(user);
         return ResponseLoginDto.builder()
                 .jwttoken(token)
-                .nextStep(user.getCustomer().getNextState().name())
+                .nextState(user.getCustomer().getNextState().name())
                 .build();
     }
 

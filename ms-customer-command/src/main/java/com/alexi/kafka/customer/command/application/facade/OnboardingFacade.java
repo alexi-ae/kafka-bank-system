@@ -1,8 +1,9 @@
 package com.alexi.kafka.customer.command.application.facade;
 
+import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
 import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
 import com.alexi.kafka.customer.command.application.command.CreateUserCommand;
-import com.alexi.kafka.customer.command.application.usercase.CustomerService;
+import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.application.usercase.UserService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class OnboardingFacade {
     private UserService userService;
 
     @Autowired
-    private CustomerService customerService;
+    private OnboardingService customerService;
 
     public void register(CreateUserCommand request) {
         userService.register(request);
@@ -24,5 +25,9 @@ public class OnboardingFacade {
     public OnbResponseDto contact(CreateContactCommand request, long customerId) {
 
         return customerService.saveContact(request, customerId);
+    }
+
+    public OnbResponseDto contactValidate(ContactValidateCommand request, long customerId) {
+        return customerService.contactValidate(request, customerId);
     }
 }

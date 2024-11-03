@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Files {
+public class File {
     private Long id;
 
     private FileType type;

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @RestController
@@ -44,6 +45,11 @@ public class OnboardingController {
     public OnbResponseDto identityInfo(@RequestBody CreateIdentityInfoCommand request,
                                        @RequestAttribute("customerId") long customerId) {
         return onboardingFacade.identityInfo(request, customerId);
+    }
+
+    @PostMapping("/upload-document")
+    public OnbResponseDto uploadDocument(@RequestPart(value = "file") MultipartFile document, @RequestAttribute("customerId") long customerId) {
+        return onboardingFacade.uploadDocument(document, customerId);
     }
 
 

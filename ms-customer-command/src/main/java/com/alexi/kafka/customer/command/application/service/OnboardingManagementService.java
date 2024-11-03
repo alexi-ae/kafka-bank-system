@@ -8,18 +8,23 @@ import com.alexi.kafka.customer.command.application.mapper.ContactMapper;
 import com.alexi.kafka.customer.command.application.mapper.DocumentMapper;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
+import com.alexi.kafka.customer.command.domain.enums.FileType;
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;
 import com.alexi.kafka.customer.command.domain.model.Contact;
 import com.alexi.kafka.customer.command.domain.model.Customer;
 import com.alexi.kafka.customer.command.domain.model.Document;
+import com.alexi.kafka.customer.command.domain.model.File;
 import com.alexi.kafka.customer.command.domain.port.ContactPersistencePort;
 import com.alexi.kafka.customer.command.domain.port.CustomerPersistencePort;
 import com.alexi.kafka.customer.command.domain.port.DocumentPersistencePort;
+import com.alexi.kafka.customer.command.domain.port.FilePersistencePort;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class OnboardingManagementService implements OnboardingService {
@@ -32,6 +37,9 @@ public class OnboardingManagementService implements OnboardingService {
 
     @Autowired
     private DocumentPersistencePort documentPersistencePort;
+
+    @Autowired
+    private FilePersistencePort filePersistencePort;
 
     @Autowired
     private ContactMapper contactMapper;
@@ -91,6 +99,29 @@ public class OnboardingManagementService implements OnboardingService {
         customer.setNextState(OnboardingStatus.UPLOAD_DOCUMENT);
         customer = customerPersistencePort.update(customer);
         return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
+    }
+
+    @Override
+    public OnbResponseDto uploadDocument(MultipartFile document, long customerId) {
+        Customer customer = customerPersistencePort.findById(customerId);
+        String urlUpload = generateUrlFromDocument(document);
+        filePersistencePort.create(toFile(customer, urlUpload));
+        customer.setNextState(OnboardingStatus.EXTRA_INFO);
+        customerPersistencePort.updateNextState(customer.getId(), customer.getNextState().name());
+        return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
+    }
+
+    File toFile(Customer customer, String urlUpload) {
+        return File.builder().imagePath(urlUpload).type(FileType.IDENTIFICATION).customer(customer).build();
+    }
+
+    private String generateUrlFromDocument(MultipartFile document) {
+        if (Objects.isNull(document)) {
+            throw new RuntimeException("Document");
+        }
+        UUID uuid = UUID.randomUUID();
+        String uuidText = uuid.toString();
+        return "https:cloud-file/directory-/" + uuidText;
     }
 
     private boolean validatePhoneNumber(Contact contact, String code) {

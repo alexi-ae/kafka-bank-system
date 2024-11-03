@@ -6,6 +6,7 @@ import com.alexi.kafka.customer.command.application.usercase.UserService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class OnboardingFacade {
@@ -36,4 +37,9 @@ public class OnboardingFacade {
     public OnbResponseDto identityInfo(CreateIdentityInfoCommand request, long customerId) {
         return onboardingService.identityInfo(request, customerId);
     }
+
+    public OnbResponseDto uploadDocument(MultipartFile document, long customerId) {
+        return onboardingService.uploadDocument(document, customerId);
+    }
+
 }

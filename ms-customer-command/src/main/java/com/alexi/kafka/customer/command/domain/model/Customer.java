@@ -31,7 +31,7 @@ public class Customer {
 
     private Document document;
 
-    private List<Files> files;
+    private List<File> files;
 
     private ExtraInfo extraInfo;
 

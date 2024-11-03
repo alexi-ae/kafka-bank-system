@@ -9,10 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class Document {
     private Long id;
-
-    private String type;
-
     private String country;
-
+    private String type;
     private String number;
 }

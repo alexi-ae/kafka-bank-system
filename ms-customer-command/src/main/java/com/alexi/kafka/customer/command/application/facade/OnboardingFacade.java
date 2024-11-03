@@ -1,9 +1,6 @@
 package com.alexi.kafka.customer.command.application.facade;
 
-import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
-import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
-import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
-import com.alexi.kafka.customer.command.application.command.CreateUserCommand;
+import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.application.usercase.UserService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
@@ -34,5 +31,9 @@ public class OnboardingFacade {
 
     public OnbResponseDto personalInfo(CreatePersonalInfoCommand request, long customerId) {
         return onboardingService.personalInfo(request, customerId);
+    }
+
+    public OnbResponseDto identityInfo(CreateIdentityInfoCommand request, long customerId) {
+        return onboardingService.identityInfo(request, customerId);
     }
 }

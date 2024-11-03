@@ -27,7 +27,7 @@ public class Customer {
 
     private Contact contact;
 
-    private PersonalInfo personalInfo;
+    private IdentityInfo identityInfo;
 
     private Document document;
 

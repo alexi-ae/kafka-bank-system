@@ -1,9 +1,6 @@
 package com.alexi.kafka.customer.command.adapters.in.web;
 
-import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
-import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
-import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
-import com.alexi.kafka.customer.command.application.command.CreateUserCommand;
+import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.application.facade.OnboardingFacade;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import lombok.AllArgsConstructor;
@@ -42,5 +39,12 @@ public class OnboardingController {
                                        @RequestAttribute("customerId") long customerId) {
         return onboardingFacade.personalInfo(request, customerId);
     }
+
+    @PostMapping("/identity-info")
+    public OnbResponseDto identityInfo(@RequestBody CreateIdentityInfoCommand request,
+                                       @RequestAttribute("customerId") long customerId) {
+        return onboardingFacade.identityInfo(request, customerId);
+    }
+
 
 }

@@ -40,6 +40,10 @@ public class CustomerEntity {
     private ContactEntity contact;
 
     @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private DocumentEntity document;
+
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

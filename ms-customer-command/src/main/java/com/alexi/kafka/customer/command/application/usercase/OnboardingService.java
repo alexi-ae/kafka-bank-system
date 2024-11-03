@@ -17,4 +17,6 @@ public interface OnboardingService {
     OnbResponseDto uploadDocument(MultipartFile document, long customerId);
 
     OnbResponseDto extraInfo(CreateExtraInfoCommand request, long customerId);
+
+    OnbResponseDto processingInfo(long customerId);
 }

@@ -6,6 +6,7 @@ import com.alexi.kafka.customer.command.application.mapper.DocumentMapper;
 import com.alexi.kafka.customer.command.application.mapper.ExtraInfoMapper;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
+import com.alexi.kafka.customer.command.domain.enums.CustomerStatus;
 import com.alexi.kafka.customer.command.domain.enums.FileType;
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;
 import com.alexi.kafka.customer.command.domain.model.*;
@@ -125,6 +126,15 @@ public class OnboardingManagementService implements OnboardingService {
 
     File toFile(Customer customer, String urlUpload) {
         return File.builder().imagePath(urlUpload).type(FileType.IDENTIFICATION).customer(customer).build();
+    }
+
+    @Override
+    public OnbResponseDto processingInfo(long customerId) {
+        Customer customer = customerPersistencePort.findById(customerId);
+        customer.setNextState(OnboardingStatus.HOME);
+        customer.setStatus(CustomerStatus.APPROVED);
+        customer = customerPersistencePort.update(customer);
+        return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
     }
 
     private String generateUrlFromDocument(MultipartFile document) {

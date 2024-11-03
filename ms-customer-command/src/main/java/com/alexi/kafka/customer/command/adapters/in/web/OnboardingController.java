@@ -57,4 +57,9 @@ public class OnboardingController {
                                     @RequestAttribute("customerId") long customerId) {
         return onboardingFacade.extraInfo(request, customerId);
     }
+
+    @PostMapping("/processing-info")
+    public OnbResponseDto processingInfo(@RequestAttribute("customerId") long customerId) {
+        return onboardingFacade.processingInfo(customerId);
+    }
 }

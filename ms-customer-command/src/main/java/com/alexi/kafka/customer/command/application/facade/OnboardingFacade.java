@@ -45,4 +45,8 @@ public class OnboardingFacade {
     public OnbResponseDto extraInfo(CreateExtraInfoCommand request, long customerId) {
         return onboardingService.extraInfo(request, customerId);
     }
+
+    public OnbResponseDto processingInfo(long customerId) {
+        return onboardingService.processingInfo(customerId);
+    }
 }

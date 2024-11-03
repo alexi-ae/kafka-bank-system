@@ -1,15 +1,12 @@
-package com.alexi.kafka.customer.command.domain.model;
+package com.alexi.kafka.customer.command.application.command;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class ExtraInfo {
+public class CreateExtraInfoCommand {
 
-    private Long id;
     private boolean politicallyExposed;
     private String maritalStatus;
     private String documentType;

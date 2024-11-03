@@ -1,13 +1,6 @@
-package com.alexi.kafka.customer.command.domain.model;
+package com.alexi.kafka.customer.command.domain.dto;
 
-import lombok.*;
-
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class ExtraInfo {
+public class ExtraInfoDto {
 
     private Long id;
     private boolean politicallyExposed;

@@ -1,9 +1,6 @@
 package com.alexi.kafka.customer.command.application.usercase;
 
-import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
-import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
-import com.alexi.kafka.customer.command.application.command.CreateIdentityInfoCommand;
-import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
+import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +15,6 @@ public interface OnboardingService {
     OnbResponseDto identityInfo(CreateIdentityInfoCommand request, long customerId);
 
     OnbResponseDto uploadDocument(MultipartFile document, long customerId);
+
+    OnbResponseDto extraInfo(CreateExtraInfoCommand request, long customerId);
 }

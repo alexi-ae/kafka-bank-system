@@ -43,6 +43,9 @@ public class CustomerEntity {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DocumentEntity document;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private ExtraInfoEntity extraInfo;
+
     @JsonBackReference
     @OneToOne
     @JoinColumn(name = "user_id")

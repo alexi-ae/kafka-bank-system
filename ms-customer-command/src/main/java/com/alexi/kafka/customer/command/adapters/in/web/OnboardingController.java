@@ -52,5 +52,9 @@ public class OnboardingController {
         return onboardingFacade.uploadDocument(document, customerId);
     }
 
-
+    @PostMapping("/extra-info")
+    public OnbResponseDto extraInfo(@RequestBody CreateExtraInfoCommand request,
+                                    @RequestAttribute("customerId") long customerId) {
+        return onboardingFacade.extraInfo(request, customerId);
+    }
 }

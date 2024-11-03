@@ -1,23 +1,15 @@
 package com.alexi.kafka.customer.command.application.service;
 
-import com.alexi.kafka.customer.command.application.command.ContactValidateCommand;
-import com.alexi.kafka.customer.command.application.command.CreateContactCommand;
-import com.alexi.kafka.customer.command.application.command.CreateIdentityInfoCommand;
-import com.alexi.kafka.customer.command.application.command.CreatePersonalInfoCommand;
+import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.application.mapper.ContactMapper;
 import com.alexi.kafka.customer.command.application.mapper.DocumentMapper;
+import com.alexi.kafka.customer.command.application.mapper.ExtraInfoMapper;
 import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import com.alexi.kafka.customer.command.domain.enums.FileType;
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;
-import com.alexi.kafka.customer.command.domain.model.Contact;
-import com.alexi.kafka.customer.command.domain.model.Customer;
-import com.alexi.kafka.customer.command.domain.model.Document;
-import com.alexi.kafka.customer.command.domain.model.File;
-import com.alexi.kafka.customer.command.domain.port.ContactPersistencePort;
-import com.alexi.kafka.customer.command.domain.port.CustomerPersistencePort;
-import com.alexi.kafka.customer.command.domain.port.DocumentPersistencePort;
-import com.alexi.kafka.customer.command.domain.port.FilePersistencePort;
+import com.alexi.kafka.customer.command.domain.model.*;
+import com.alexi.kafka.customer.command.domain.port.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +34,16 @@ public class OnboardingManagementService implements OnboardingService {
     private FilePersistencePort filePersistencePort;
 
     @Autowired
+    private ExtraInfoPersistencePort extraInfoPersistencePort;
+
+    @Autowired
     private ContactMapper contactMapper;
 
     @Autowired
     private DocumentMapper documentMapper;
+
+    @Autowired
+    private ExtraInfoMapper extraInfoMapper;
 
     @Override
     public OnbResponseDto saveContact(CreateContactCommand request, long customerId) {
@@ -108,6 +106,20 @@ public class OnboardingManagementService implements OnboardingService {
         filePersistencePort.create(toFile(customer, urlUpload));
         customer.setNextState(OnboardingStatus.EXTRA_INFO);
         customerPersistencePort.updateNextState(customer.getId(), customer.getNextState().name());
+        return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
+    }
+
+    @Override
+    public OnbResponseDto extraInfo(CreateExtraInfoCommand request, long customerId) {
+        Customer customer = customerPersistencePort.findById(customerId);
+        customer.setExtraInfo(Objects.isNull(customer.getExtraInfo()) ? new ExtraInfo() : customer.getExtraInfo());
+
+        ExtraInfo extraInfo = extraInfoMapper.toModel(customer.getExtraInfo(), request);
+        extraInfo = extraInfoPersistencePort.create(extraInfo);
+
+        customer.setExtraInfo(extraInfo);
+        customer.setNextState(OnboardingStatus.PROCESSING);
+        customer = customerPersistencePort.update(customer);
         return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
     }
 

@@ -42,4 +42,7 @@ public class OnboardingFacade {
         return onboardingService.uploadDocument(document, customerId);
     }
 
+    public OnbResponseDto extraInfo(CreateExtraInfoCommand request, long customerId) {
+        return onboardingService.extraInfo(request, customerId);
+    }
 }

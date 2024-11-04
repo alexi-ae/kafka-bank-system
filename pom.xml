@@ -30,6 +30,7 @@
     <modules>
         <module>ms-customer-command</module>
         <module>ms-customer-query</module>
+        <module>auth-command</module>
     </modules>
 
     <properties>
@@ -90,6 +91,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
         </plugins>

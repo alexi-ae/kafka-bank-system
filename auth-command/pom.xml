@@ -2,27 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <parent>
         <groupId>com.alexi.bank</groupId>
         <artifactId>kafka-bank-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.alexiae.kafka.customer.query</groupId>
-    <artifactId>ms-customer-query</artifactId>
+    <groupId>com.alexiae.kafka.auth</groupId>
+    <artifactId>auth-command</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-customer-query</name>
+    <name>auth-command</name>
     <description>Demo project for Spring Boot</description>
     <url/>
     <licenses>
@@ -43,8 +31,23 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

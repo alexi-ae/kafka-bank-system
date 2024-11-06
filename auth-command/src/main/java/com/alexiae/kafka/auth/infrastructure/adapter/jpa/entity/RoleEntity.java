@@ -1,4 +1,4 @@
-package com.alexiae.kafka.auth.infrastructure.adapter.entity;
+package com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

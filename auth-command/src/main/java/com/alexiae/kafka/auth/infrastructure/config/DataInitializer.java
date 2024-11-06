@@ -1,7 +1,7 @@
 package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.RoleEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.repository.RoleRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.RoleEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

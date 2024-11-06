@@ -1,7 +1,7 @@
 package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.UserEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.repository.UserRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

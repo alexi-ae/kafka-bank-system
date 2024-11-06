@@ -1,6 +1,6 @@
 package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

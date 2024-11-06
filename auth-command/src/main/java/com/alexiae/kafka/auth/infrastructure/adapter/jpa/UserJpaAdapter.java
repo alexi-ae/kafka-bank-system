@@ -1,12 +1,12 @@
-package com.alexiae.kafka.auth.infrastructure.adapter;
+package com.alexiae.kafka.auth.infrastructure.adapter.jpa;
 
 import com.alexiae.kafka.auth.domain.model.User;
 import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.RoleEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.UserEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.mapper.UserEntityMapper;
-import com.alexiae.kafka.auth.infrastructure.adapter.repository.RoleRepository;
-import com.alexiae.kafka.auth.infrastructure.adapter.repository.UserRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.RoleEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.mapper.UserEntityMapper;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.RoleRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.alexiae.kafka.auth.infrastructure.adapter.mapper;
+package com.alexiae.kafka.auth.infrastructure.adapter.jpa.mapper;
 
 import com.alexiae.kafka.auth.domain.model.User;
-import com.alexiae.kafka.auth.infrastructure.adapter.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

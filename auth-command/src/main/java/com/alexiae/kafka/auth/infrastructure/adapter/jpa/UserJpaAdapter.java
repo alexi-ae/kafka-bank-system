@@ -1,5 +1,8 @@
 package com.alexiae.kafka.auth.infrastructure.adapter.jpa;
 
+import com.alexiae.kafka.auth.domain.exception.ApiRestException;
+import com.alexiae.kafka.auth.domain.exception.ErrorReason;
+import com.alexiae.kafka.auth.domain.exception.ErrorSource;
 import com.alexiae.kafka.auth.domain.model.User;
 import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
 import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.RoleEntity;
@@ -32,6 +35,13 @@ public class UserJpaAdapter implements UserPersistencePort {
 
     @Override
     public User create(User model) {
+        if (userRepository.findByEmail(model.getEmail()).isPresent()) {
+            throw ApiRestException.builder()
+                    .reason(ErrorReason.USER_ALREADY_EXISTS)
+                    .source(ErrorSource.BUSINESS_SERVICE)
+                    .build();
+        }
+
         model.setPassword(passwordEncoder.encode(model.getPassword()));
         model.setRoles(new HashSet<>());
         UserEntity userEntity = userEntityMapper.toEntity(model);

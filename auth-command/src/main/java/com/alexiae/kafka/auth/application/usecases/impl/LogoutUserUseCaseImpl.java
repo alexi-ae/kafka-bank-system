@@ -8,6 +8,8 @@ import com.alexiae.kafka.auth.domain.port.TokenPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.ZoneId;
 
 @Service
@@ -29,8 +31,11 @@ public class LogoutUserUseCaseImpl implements LogoutUserUseCase {
             token = token.substring(7);
         }
         Token tokenInfo = tokenService.getInfo(token);
-        long expiration = tokenInfo.getExpiresAt().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-        tokenRedisService.revokeToken(token, expiration);
-        tokenPersistencePort.updateRevok(token);
+        long ttlInMillis = Duration.between(Instant.now(), tokenInfo.getExpiresAt().atZone(ZoneId.systemDefault()).toInstant()).toMillis();
+
+        if (ttlInMillis > 0) {
+            tokenRedisService.revokeToken(token, ttlInMillis);
+            tokenPersistencePort.updateRevok(token);
+        }
     }
 }

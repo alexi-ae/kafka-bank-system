@@ -50,8 +50,7 @@ public class TokenServiceImpl implements TokenService {
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime())
                 .expiresAt(claims.getExpiration().toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDateTime())
+                        .atZone(ZoneId.systemDefault()).toLocalDateTime())
                 .revoked(Boolean.FALSE)
                 .build();
     }

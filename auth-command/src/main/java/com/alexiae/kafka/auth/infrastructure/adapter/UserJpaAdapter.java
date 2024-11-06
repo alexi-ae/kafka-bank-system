@@ -31,15 +31,14 @@ public class UserJpaAdapter implements UserPersistencePort {
     private UserEntityMapper userEntityMapper;
 
     @Override
-    public void create(User model) {
+    public User create(User model) {
         model.setPassword(passwordEncoder.encode(model.getPassword()));
         model.setRoles(new HashSet<>());
         UserEntity userEntity = userEntityMapper.toEntity(model);
-
         RoleEntity rolEntity = roleRepository.findRolEntityByDescription("USER").orElseThrow(() -> new RuntimeException("NO HAS ROLE"));
         userEntity.getRoles().add(rolEntity);
 
-        userRepository.save(userEntity);
+        return userEntityMapper.toModel(userRepository.save(userEntity));
     }
 
     @Override

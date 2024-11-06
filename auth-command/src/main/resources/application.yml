@@ -10,6 +10,13 @@ spring:
       port: 6379
       password: authdb
       timeout: 60000
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      customer:
+        create: customer-created-topic
 
 security:
   jwt:

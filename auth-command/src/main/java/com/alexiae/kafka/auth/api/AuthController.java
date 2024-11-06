@@ -38,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public void logout(@RequestAttribute("userId") String userId) {
-        logoutUserUseCase.execute(userId);
+    public void logout(@RequestHeader(value = "Authorization", required = true) String token) {
+        logoutUserUseCase.execute(token);
     }
 }

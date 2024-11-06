@@ -5,6 +5,11 @@ spring:
     mongodb:
       uri: mongodb://authdb:nosql@localhost:27017
       database: authdb
+    redis:
+      host: localhost
+      port: 6379
+      password: authdb
+      timeout: 60000
 
 security:
   jwt:

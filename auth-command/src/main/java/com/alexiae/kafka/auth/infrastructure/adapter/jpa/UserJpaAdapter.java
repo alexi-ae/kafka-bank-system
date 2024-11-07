@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -43,7 +43,7 @@ public class UserJpaAdapter implements UserPersistencePort {
         }
 
         model.setPassword(passwordEncoder.encode(model.getPassword()));
-        model.setRoles(new HashSet<>());
+        model.setRoles(new ArrayList<>());
         UserEntity userEntity = userEntityMapper.toEntity(model);
         RoleEntity rolEntity = roleRepository.findRolEntityByDescription("USER").orElseThrow(() -> new RuntimeException("NO HAS ROLE"));
         userEntity.getRoles().add(rolEntity);

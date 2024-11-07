@@ -33,7 +33,7 @@ public class TokenServiceImpl implements TokenService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         claims.put("email", user.getEmail());
-        claims.put("roles", user.getRoles());
+        claims.put("roles", user.getRoles().stream().map(role -> role.getDescription()).toList());
         claims.put("state",
                 Objects.nonNull(user.getCustomerId()) ? user.getStatus() : "PENDING");
         claims.put("customerId",

@@ -1,57 +1,59 @@
 package com.alexi.kafka.customer.command.infrastructure.config;
 
 import com.alexi.kafka.customer.command.application.service.JwtService;
-import com.alexi.kafka.customer.command.domain.model.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtServiceImpl implements JwtService {
-
-    @Value("${security.jwt.time}")
-    private long JWT_TOKEN_VALIDITY;
 
     @Value("${security.jwt.secret}")
     private String secretKey;
 
     @Override
-    public String generateToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
-        claims.put("email", user.getEmail());
-        claims.put("roles", user.getAuthorities());
-        claims.put("state",
-                Objects.nonNull(user.getCustomer()) ? user.getCustomer().getStatus() : "PENDING");
-        claims.put("customerId",
-                Objects.nonNull(user.getCustomer()) ? user.getCustomer().getId() : BigDecimal.ZERO);
-        return createToken(claims, user.getEmail());
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 
-    private String createToken(Map<String, Object> claims, String username) {
-        return Jwts.builder().setClaims(claims).setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
+    @Override
+    public Collection<GrantedAuthority> getAuthoritiesFromToken(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+
+        List<String> roles = claims.get("roles", List.class);
+
+        if (roles == null) {
+            return new ArrayList<>(); // Retornar una lista vacía si no hay roles
+        }
+
+        // Convertir cada rol a SimpleGrantedAuthority
+        return roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
-    private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
+    @Override
+    public String getUsernameFromToken(String token) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claims.get("email").toString();
     }
 
-    public String getCustomerId(String token) {
+    @Override
+    public String getCustomerIdFromToken(String token) {
         final Claims claims = getAllClaimsFromToken(token);
         return claims.get("customerId").toString();
     }
@@ -60,4 +62,8 @@ public class JwtServiceImpl implements JwtService {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 
+    public String getCustomerId(String token) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claims.get("customerId").toString();
+    }
 }

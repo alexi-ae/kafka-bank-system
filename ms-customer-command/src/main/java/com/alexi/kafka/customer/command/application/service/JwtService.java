@@ -1,8 +1,16 @@
 package com.alexi.kafka.customer.command.application.service;
 
-import com.alexi.kafka.customer.command.domain.model.User;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 public interface JwtService {
 
-    String generateToken(User user);
+    boolean validateToken(String token);
+
+    Collection<GrantedAuthority> getAuthoritiesFromToken(String token);
+
+    String getUsernameFromToken(String token);
+
+    String getCustomerIdFromToken(String token);
 }

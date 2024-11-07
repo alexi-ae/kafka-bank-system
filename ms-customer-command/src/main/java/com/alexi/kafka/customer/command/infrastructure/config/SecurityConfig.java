@@ -43,37 +43,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(WHITE_LIST_URL)
-//                        .permitAll() // Whitelisting some paths from authentication
-//                        .anyRequest().authenticated()) // All other requests must be authenticated
-//                .formLogin(Customizer.withDefaults())
-//                .httpBasic(Customizer.withDefaults());
-
         http
                 .csrf(
                         AbstractHttpConfigurer::disable) // Disabling CSRF as we use JWT which is immune to CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(WHITE_LIST_URL)
-                        .permitAll() // Whitelisting some paths from authentication
+                        .requestMatchers(WHITE_LIST_URL).permitAll() // Whitelisting some paths from authentication
+                        .requestMatchers("/ob/**").hasAnyRole("USER", "CUSTOMER")
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()) // All other requests must be authenticated
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session management
                 //.authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class); // Registering our JwtAuthFilter
-        //.formLogin(Customizer.withDefaults())
-        //.httpBasic(Customizer.withDefaults());
-
-
         return http.build(); // Construir el filtro de seguridad
     }
-
-//    @Bean
-//    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-//        return new JwtAuthenticationFilter(); // Filtro para manejar la autenticación con JWT
-//    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {

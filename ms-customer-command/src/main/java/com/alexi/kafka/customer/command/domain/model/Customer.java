@@ -36,4 +36,7 @@ public class Customer {
     private ExtraInfo extraInfo;
 
     private User user;
+
+    private String userId;
+
 }

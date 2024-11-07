@@ -1,7 +1,7 @@
 package com.alexi.kafka.customer.command.infrastructure.config;
 
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.RolEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.RolRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.RolEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.RolRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

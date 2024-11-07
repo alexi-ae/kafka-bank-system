@@ -1,4 +1,4 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.entity;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity;
 
 import com.alexi.kafka.customer.command.domain.enums.CustomerStatus;
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;

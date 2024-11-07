@@ -1,4 +1,4 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.entity;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

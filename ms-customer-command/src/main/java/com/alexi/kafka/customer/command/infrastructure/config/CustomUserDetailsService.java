@@ -1,7 +1,7 @@
 package com.alexi.kafka.customer.command.infrastructure.config;
 
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.UserEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.UserRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.UserEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

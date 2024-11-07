@@ -1,6 +1,6 @@
 package com.alexi.kafka.customer.command.infrastructure.config;
 
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.UserEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -1,10 +1,10 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa;
 
 import com.alexi.kafka.customer.command.domain.model.Contact;
 import com.alexi.kafka.customer.command.domain.port.ContactPersistencePort;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.ContactEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.mapper.ContactEntityMapper;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.ContactRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.ContactEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper.ContactEntityMapper;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.ContactRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

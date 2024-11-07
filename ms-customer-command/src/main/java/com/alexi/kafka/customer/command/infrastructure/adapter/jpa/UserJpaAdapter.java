@@ -1,12 +1,12 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa;
 
 import com.alexi.kafka.customer.command.domain.model.User;
 import com.alexi.kafka.customer.command.domain.port.UserPersistencePort;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.RolEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.UserEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.mapper.UserEntityMapper;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.RolRepository;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.UserRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.RolEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.UserEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper.UserEntityMapper;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.RolRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

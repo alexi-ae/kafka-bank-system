@@ -1,4 +1,4 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.entity;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,10 +1,10 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa;
 
 import com.alexi.kafka.customer.command.domain.model.Document;
 import com.alexi.kafka.customer.command.domain.port.DocumentPersistencePort;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.DocumentEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.mapper.DocumentEntityMapper;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.DocumentRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.DocumentEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper.DocumentEntityMapper;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.DocumentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

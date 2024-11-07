@@ -1,7 +1,7 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.mapper;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper;
 
 import com.alexi.kafka.customer.command.domain.model.File;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.FilesEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.FilesEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

@@ -1,7 +1,7 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.mapper;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper;
 
 import com.alexi.kafka.customer.command.domain.model.Document;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.DocumentEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.DocumentEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

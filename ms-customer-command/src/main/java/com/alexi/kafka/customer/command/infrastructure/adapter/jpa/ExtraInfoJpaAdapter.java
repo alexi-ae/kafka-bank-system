@@ -1,10 +1,10 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa;
 
 import com.alexi.kafka.customer.command.domain.model.ExtraInfo;
 import com.alexi.kafka.customer.command.domain.port.ExtraInfoPersistencePort;
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.ExtraInfoEntity;
-import com.alexi.kafka.customer.command.infrastructure.adapter.mapper.ExtraInfoEntityMapper;
-import com.alexi.kafka.customer.command.infrastructure.adapter.repository.ExtraInfoRepository;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.ExtraInfoEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.mapper.ExtraInfoEntityMapper;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository.ExtraInfoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

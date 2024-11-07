@@ -1,6 +1,6 @@
-package com.alexi.kafka.customer.command.infrastructure.adapter.repository;
+package com.alexi.kafka.customer.command.infrastructure.adapter.jpa.repository;
 
-import com.alexi.kafka.customer.command.infrastructure.adapter.entity.RolEntity;
+import com.alexi.kafka.customer.command.infrastructure.adapter.jpa.entity.RolEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

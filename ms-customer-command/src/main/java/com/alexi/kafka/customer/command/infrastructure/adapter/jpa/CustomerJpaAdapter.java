@@ -31,11 +31,6 @@ public class CustomerJpaAdapter implements CustomerPersistencePort {
     }
 
     @Override
-    public boolean existsByEmail(String email) {
-        return customerRepository.existsCustomerEntityByUserEmail(email);
-    }
-
-    @Override
     public Customer findById(long customerId) {
         CustomerEntity entity = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException());
         return customerEntityMapper.toModel(entity);

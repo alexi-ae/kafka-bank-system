@@ -21,14 +21,4 @@ public class CustomerDto {
     private LocalDate birthdate;
 
     private CustomerStatus status;
-
-    //private Contact contact;
-
-    //private Document document;
-
-    //private List<Files> files;
-
-    //private ExtraInfo extraInfo;
-
-    private UserDto user;
 }

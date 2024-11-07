@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerEvent {
+public class CreateCustomerEvent {
     private String userId;
     private String email;
 }

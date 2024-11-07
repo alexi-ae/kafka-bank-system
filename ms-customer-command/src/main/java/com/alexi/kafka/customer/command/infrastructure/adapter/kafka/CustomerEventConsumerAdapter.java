@@ -1,7 +1,7 @@
 package com.alexi.kafka.customer.command.infrastructure.adapter.kafka;
 
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;
-import com.alexi.kafka.customer.command.domain.event.CustomerEvent;
+import com.alexi.kafka.customer.command.domain.event.CreateCustomerEvent;
 import com.alexi.kafka.customer.command.domain.model.Customer;
 import com.alexi.kafka.customer.command.domain.port.CustomerPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class CustomerEventConsumerAdapter {
 
     @KafkaListener(topics = "customer-created-topic", groupId = "customer-group-id",
             containerFactory = "customerKafkaListenerFactory")
-    public void create(CustomerEvent event) {
+    public void create(CreateCustomerEvent event) {
         customerPersistencePort.create(Customer.builder()
                 .userId(event.getUserId())
                 .nextState(OnboardingStatus.CONTACT)

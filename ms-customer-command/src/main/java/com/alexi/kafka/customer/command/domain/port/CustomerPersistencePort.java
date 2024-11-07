@@ -8,8 +8,6 @@ public interface CustomerPersistencePort {
 
     Customer update(Customer customer);
 
-    boolean existsByEmail(String email);
-
     Customer findById(long customerId);
 
     boolean updateNextState(long customerId, String nextState);

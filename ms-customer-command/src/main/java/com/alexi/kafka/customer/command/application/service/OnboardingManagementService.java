@@ -4,7 +4,7 @@ import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.application.mapper.ContactMapper;
 import com.alexi.kafka.customer.command.application.mapper.DocumentMapper;
 import com.alexi.kafka.customer.command.application.mapper.ExtraInfoMapper;
-import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
+import com.alexi.kafka.customer.command.application.usecases.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import com.alexi.kafka.customer.command.domain.enums.CustomerStatus;
 import com.alexi.kafka.customer.command.domain.enums.FileType;

@@ -1,8 +1,7 @@
 package com.alexi.kafka.customer.command.application.facade;
 
 import com.alexi.kafka.customer.command.application.command.*;
-import com.alexi.kafka.customer.command.application.usercase.OnboardingService;
-import com.alexi.kafka.customer.command.application.usercase.UserService;
+import com.alexi.kafka.customer.command.application.usecases.OnboardingService;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class OnboardingFacade {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private OnboardingService onboardingService;
-
-    public void register(CreateUserCommand request) {
-        userService.register(request);
-    }
 
     public OnbResponseDto contact(CreateContactCommand request, long customerId) {
 

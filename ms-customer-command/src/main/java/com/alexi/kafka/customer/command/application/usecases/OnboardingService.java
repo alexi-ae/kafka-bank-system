@@ -1,4 +1,4 @@
-package com.alexi.kafka.customer.command.application.usercase;
+package com.alexi.kafka.customer.command.application.usecases;
 
 import com.alexi.kafka.customer.command.application.command.*;
 import com.alexi.kafka.customer.command.domain.dto.OnbResponseDto;

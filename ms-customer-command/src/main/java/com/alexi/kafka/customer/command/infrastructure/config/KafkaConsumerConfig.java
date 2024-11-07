@@ -1,6 +1,6 @@
 package com.alexi.kafka.customer.command.infrastructure.config;
 
-import com.alexi.kafka.customer.command.domain.event.CustomerEvent;
+import com.alexi.kafka.customer.command.domain.event.CreateCustomerEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -39,9 +39,9 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CustomerEvent> customerKafkaListenerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CustomerEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory(CustomerEvent.class));
+    public ConcurrentKafkaListenerContainerFactory<String, CreateCustomerEvent> customerKafkaListenerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, CreateCustomerEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(CreateCustomerEvent.class));
         return factory;
     }
 

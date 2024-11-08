@@ -1,6 +1,6 @@
-package com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository;
+package com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.repository;
 
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.entity.UserEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

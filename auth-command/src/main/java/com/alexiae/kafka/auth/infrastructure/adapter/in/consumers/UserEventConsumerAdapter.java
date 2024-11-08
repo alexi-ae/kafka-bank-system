@@ -1,4 +1,4 @@
-package com.alexiae.kafka.auth.infrastructure.adapter.kafka;
+package com.alexiae.kafka.auth.infrastructure.adapter.in.consumers;
 
 import com.alexiae.kafka.auth.domain.event.UpdateUserEvent;
 import com.alexiae.kafka.auth.domain.port.UserPersistencePort;

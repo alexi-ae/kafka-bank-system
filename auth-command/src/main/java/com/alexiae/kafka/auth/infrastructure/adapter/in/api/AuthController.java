@@ -1,4 +1,4 @@
-package com.alexiae.kafka.auth.api;
+package com.alexiae.kafka.auth.infrastructure.adapter.in.api;
 
 
 import com.alexiae.kafka.auth.application.command.CreateUserCommand;

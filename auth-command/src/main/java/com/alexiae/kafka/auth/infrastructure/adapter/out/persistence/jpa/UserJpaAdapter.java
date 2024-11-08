@@ -1,15 +1,15 @@
-package com.alexiae.kafka.auth.infrastructure.adapter.jpa;
+package com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.auth.domain.exception.ApiRestException;
 import com.alexiae.kafka.auth.domain.exception.ErrorReason;
 import com.alexiae.kafka.auth.domain.exception.ErrorSource;
 import com.alexiae.kafka.auth.domain.model.User;
 import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.RoleEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.entity.UserEntity;
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.mapper.UserEntityMapper;
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.RoleRepository;
-import com.alexiae.kafka.auth.infrastructure.adapter.jpa.repository.UserRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.entity.RoleEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.entity.UserEntity;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.mapper.UserEntityMapper;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.repository.RoleRepository;
+import com.alexiae.kafka.auth.infrastructure.adapter.out.persistence.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

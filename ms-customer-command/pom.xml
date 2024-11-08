@@ -51,7 +51,7 @@
         <artifactId>kafka-bank-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.alexi.kafka.customer.command</groupId>
+    <groupId>com.alexiae.kafka.auth</groupId>
     <artifactId>ms-customer-command</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ms-customer-command</name>

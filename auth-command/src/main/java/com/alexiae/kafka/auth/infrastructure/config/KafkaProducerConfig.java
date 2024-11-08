@@ -19,23 +19,26 @@ import java.util.Map;
 
 @Configuration
 @EnableKafka
-public class KafkaConfig {
+public class KafkaProducerConfig {
 
     @Value("${spring.kafka.producer.customer.create}")
     private String customerCreate;
 
-    @Bean
-    public ProducerFactory<String, CreateCustomerEvent> producerFactory() {
+    private Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class); // Usar JsonSerializer aquí
-
-        return new DefaultKafkaProducerFactory<>(configProps);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return configProps;
     }
 
     @Bean
-    public KafkaTemplate<String, CreateCustomerEvent> kafkaTemplate() {
+    public <T> ProducerFactory<String, T> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
+
+    @Bean
+    public KafkaTemplate<String, CreateCustomerEvent> createCustomerEventKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

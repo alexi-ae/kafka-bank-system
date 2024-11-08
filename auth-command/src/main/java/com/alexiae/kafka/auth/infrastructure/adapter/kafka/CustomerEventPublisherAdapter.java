@@ -14,10 +14,10 @@ public class CustomerEventPublisherAdapter implements CustomerEventPublisher {
     private String customerCreate;
 
     @Autowired
-    private KafkaTemplate<String, CreateCustomerEvent> kafkaTemplate;
+    private KafkaTemplate<String, CreateCustomerEvent> createCustomerEventKafkaTemplate;
 
     @Override
     public void publishCustomerCreatedEvent(CreateCustomerEvent event) {
-        kafkaTemplate.send(customerCreate, event);
+        createCustomerEventKafkaTemplate.send(customerCreate, event);
     }
 }

@@ -11,12 +11,20 @@ spring:
       password: authdb
       timeout: 60000
   kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: customer-group-id       # Nombre del grupo de consumidores
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      topic:
+        user-update: user-update-topic
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      customer:
-        create: customer-created-topic
+      topic:
+        customer-create: customer-create-topic
 
 security:
   jwt:

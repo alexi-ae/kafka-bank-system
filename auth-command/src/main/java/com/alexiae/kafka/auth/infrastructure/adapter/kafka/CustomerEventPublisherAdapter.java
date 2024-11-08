@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerEventPublisherAdapter implements CustomerEventPublisher {
 
-    @Value("${spring.kafka.producer.customer.create}")
-    private String customerCreate;
+    @Value("${spring.kafka.producer.topic.customer-create}")
+    private String customerCreateTopic;
 
     @Autowired
     private KafkaTemplate<String, CreateCustomerEvent> createCustomerEventKafkaTemplate;
 
     @Override
     public void publishCustomerCreatedEvent(CreateCustomerEvent event) {
-        createCustomerEventKafkaTemplate.send(customerCreate, event);
+        createCustomerEventKafkaTemplate.send(customerCreateTopic, event);
     }
 }

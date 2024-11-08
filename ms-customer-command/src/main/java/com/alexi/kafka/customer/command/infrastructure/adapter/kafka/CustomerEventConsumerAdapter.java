@@ -8,15 +8,11 @@ import com.alexi.kafka.customer.command.domain.event.UpdateUserEvent;
 import com.alexi.kafka.customer.command.domain.model.Customer;
 import com.alexi.kafka.customer.command.domain.port.CustomerPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerEventConsumerAdapter {
-
-    @Value("${spring.kafka.consumer.topic.customer-create}")
-    private String customerCreateTopic;
 
     @Autowired
     private CustomerPersistencePort customerPersistencePort;
@@ -24,7 +20,7 @@ public class CustomerEventConsumerAdapter {
     @Autowired
     private UserEventPublisher userEventPublisher;
 
-    @KafkaListener(topics = "customer-created-topic", groupId = "customer-group-id",
+    @KafkaListener(topics = "customer-create-topic", groupId = "customer-group-id",
             containerFactory = "customerCreateKafkaListenerFactory")
     public void create(CreateCustomerEvent event) {
         Customer customer = customerPersistencePort.create(Customer.builder()

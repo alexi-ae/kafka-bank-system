@@ -21,12 +21,15 @@ import java.util.Map;
 @EnableKafka
 public class KafkaProducerConfig {
 
-    @Value("${spring.kafka.producer.customer.create}")
-    private String customerCreate;
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Value("${spring.kafka.producer.topic.customer-create}")
+    private String customerCreateTopic;
 
     private Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         return configProps;
@@ -43,8 +46,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public NewTopic userCreatedTopic() {
-        return TopicBuilder.name(customerCreate)
+    public NewTopic customerCreateTopic() {
+        return TopicBuilder.name(customerCreateTopic)
                 .partitions(1)
                 .replicas(1)
                 .build();

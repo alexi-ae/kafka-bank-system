@@ -1,6 +1,6 @@
-package com.alexi.kafka.customer.command.infrastructure.config;
+package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexi.kafka.customer.command.domain.event.CreateCustomerEvent;
+import com.alexiae.kafka.auth.domain.event.UpdateUserEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -25,9 +25,8 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value("${spring.kafka.consumer.topic.customer-create}")
-    private String customerCreateTopic;
-
+    @Value("${spring.kafka.consumer.topic.user-update}")
+    private String userUpdateTopic;
 
     private Map<String, Object> consumerConfigs() {
         Map<String, Object> config = new HashMap<>();
@@ -47,17 +46,18 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CreateCustomerEvent> customerCreateKafkaListenerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CreateCustomerEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory(CreateCustomerEvent.class));
+    public ConcurrentKafkaListenerContainerFactory<String, UpdateUserEvent> userUpdateKafkaListenerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, UpdateUserEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(UpdateUserEvent.class));
         return factory;
     }
 
     @Bean
-    public NewTopic customerCreateTopic() {
-        return TopicBuilder.name(customerCreateTopic)
+    public NewTopic userUpdateTopic() {
+        return TopicBuilder.name(userUpdateTopic)
                 .partitions(1)
                 .replicas(1)
                 .build();
     }
+
 }

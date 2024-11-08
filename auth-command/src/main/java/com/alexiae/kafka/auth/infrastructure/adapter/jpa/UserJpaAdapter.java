@@ -52,6 +52,13 @@ public class UserJpaAdapter implements UserPersistencePort {
     }
 
     @Override
+    public void updateCustomerId(String userId, long customerId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> ApiRestException.builder().source(ErrorSource.BUSINESS_SERVICE).reason(ErrorReason.BAD_REQUEST).build());
+        userEntity.setCustomerId(customerId);
+        userEntityMapper.toModel(userRepository.save(userEntity));
+    }
+
+    @Override
     public User getByEmail(String email) {
         UserEntity entity = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Erro encontrando el user"));
         return userEntityMapper.toModel(entity);

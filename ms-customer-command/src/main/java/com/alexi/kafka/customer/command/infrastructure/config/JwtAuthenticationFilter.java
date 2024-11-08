@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -33,23 +33,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = authHeader.substring(7);
 
-        if (Boolean.TRUE.equals(jwtService.validateToken(token))) {
-            // Extraer la identidad y los roles del token
+        if (token != null && jwtService.validateToken(token)) {
             String username = jwtService.getUsernameFromToken(token);
-            Collection<GrantedAuthority> authorities = jwtService.getAuthoritiesFromToken(token);
+            List<GrantedAuthority> authorities = jwtService.getAuthoritiesFromToken(token);
             String customerId = jwtService.getCustomerIdFromToken(token);
             request.setAttribute("customerId", customerId);
+            // Configura la autenticación en el contexto de Spring Security
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    null, null, authorities);
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            // Crear el objeto de autenticación
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(username, null, authorities);
-
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-            // 3. Configurar el contexto de seguridad
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
+//        if (Boolean.TRUE.equals(jwtService.validateToken(token))) {
+//            // Extraer la identidad y los roles del token
+//            String username = jwtService.getUsernameFromToken(token);
+//            List<GrantedAuthority> authorities = jwtService.getAuthoritiesFromToken(token);
+//            String customerId = jwtService.getCustomerIdFromToken(token);
+//            request.setAttribute("customerId", customerId);
+//
+//            if (username != null) {
+//                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+//                        username, null, authorities);
+//                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//
+//                SecurityContextHolder.getContext().setAuthentication(authToken);
+//            }
+//        }
         // Continuar con la cadena de filtros
         filterChain.doFilter(request, response);
     }

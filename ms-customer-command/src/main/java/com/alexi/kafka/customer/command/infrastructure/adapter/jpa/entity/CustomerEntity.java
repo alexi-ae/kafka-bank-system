@@ -45,4 +45,8 @@ public class CustomerEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ExtraInfoEntity extraInfo;
+
+    @Column(name = "user_id")
+    private String userId;
+
 }

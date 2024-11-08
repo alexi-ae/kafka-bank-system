@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,17 +30,18 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Collection<GrantedAuthority> getAuthoritiesFromToken(String token) {
+    public List<GrantedAuthority> getAuthoritiesFromToken(String token) {
         Claims claims = getAllClaimsFromToken(token);
 
         List<String> roles = claims.get("roles", List.class);
 
+
         if (roles == null) {
             return new ArrayList<>(); // Retornar una lista vacía si no hay roles
         }
-
         // Convertir cada rol a SimpleGrantedAuthority
         return roles.stream()
+                .map(role -> "ROLE_" + role.toUpperCase())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

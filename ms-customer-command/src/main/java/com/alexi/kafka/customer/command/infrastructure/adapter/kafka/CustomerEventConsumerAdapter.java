@@ -1,5 +1,6 @@
 package com.alexi.kafka.customer.command.infrastructure.adapter.kafka;
 
+import com.alexi.kafka.customer.command.domain.enums.CustomerStatus;
 import com.alexi.kafka.customer.command.domain.enums.OnboardingStatus;
 import com.alexi.kafka.customer.command.domain.event.CreateCustomerEvent;
 import com.alexi.kafka.customer.command.domain.model.Customer;
@@ -19,6 +20,7 @@ public class CustomerEventConsumerAdapter {
     public void create(CreateCustomerEvent event) {
         customerPersistencePort.create(Customer.builder()
                 .userId(event.getUserId())
+                .status(CustomerStatus.PENDING)
                 .nextState(OnboardingStatus.CONTACT)
                 .build());
     }

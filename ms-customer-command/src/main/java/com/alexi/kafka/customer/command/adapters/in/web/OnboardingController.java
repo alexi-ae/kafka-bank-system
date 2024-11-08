@@ -18,8 +18,8 @@ public class OnboardingController {
 
     @PostMapping("/contact")
     public OnbResponseDto contact(@RequestBody CreateContactCommand request,
-                                  @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.contact(request, customerId);
+                                  @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.contact(request, Long.getLong(customerId));
     }
 
     @PostMapping("/contact-validate")

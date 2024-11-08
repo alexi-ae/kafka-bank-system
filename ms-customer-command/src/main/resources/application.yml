@@ -11,11 +11,20 @@ spring:
       ddl-auto: update
     show-sql: true
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
       bootstrap-servers: localhost:9092
       group-id: customer-group-id       # Nombre del grupo de consumidores
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      topic:
+        customer-create: customer-create-topic
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      topic:
+        user-update: user-update-topic
 
 security:
   jwt:

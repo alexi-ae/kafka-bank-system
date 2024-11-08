@@ -30,6 +30,7 @@
     <modules>
         <module>auth-command</module>
         <module>customer-command</module>
+        <module>account-command</module>
     </modules>
 
     <properties>

@@ -8,7 +8,7 @@
         <version>3.3.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.alexi.bank</groupId>
+    <groupId>com.alexiae.bank</groupId>
     <artifactId>kafka-bank-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>kafka-bank-system</name>
@@ -28,9 +28,8 @@
     </scm>
     <packaging>pom</packaging>
     <modules>
-        <module>ms-customer-command</module>
-        <module>ms-customer-query</module>
         <module>auth-command</module>
+        <module>customer-command</module>
     </modules>
 
     <properties>

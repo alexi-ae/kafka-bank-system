@@ -19,40 +19,40 @@ public class OnboardingController {
     @PostMapping("/contact")
     public OnbResponseDto contact(@RequestBody CreateContactCommand request,
                                   @RequestAttribute("customerId") String customerId) {
-        return onboardingFacade.contact(request, Long.getLong(customerId));
+        return onboardingFacade.contact(request, Long.parseLong(customerId));
     }
 
     @PostMapping("/contact-validate")
     public OnbResponseDto contactValidate(@RequestBody ContactValidateCommand request,
-                                          @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.contactValidate(request, customerId);
+                                          @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.contactValidate(request, Long.parseLong(customerId));
     }
 
     @PostMapping("/personal-info")
     public OnbResponseDto personalInfo(@RequestBody CreatePersonalInfoCommand request,
-                                       @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.personalInfo(request, customerId);
+                                       @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.personalInfo(request, Long.parseLong(customerId));
     }
 
     @PostMapping("/identity-info")
     public OnbResponseDto identityInfo(@RequestBody CreateIdentityInfoCommand request,
-                                       @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.identityInfo(request, customerId);
+                                       @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.identityInfo(request, Long.parseLong(customerId));
     }
 
     @PostMapping("/upload-document")
-    public OnbResponseDto uploadDocument(@RequestPart(value = "file") MultipartFile document, @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.uploadDocument(document, customerId);
+    public OnbResponseDto uploadDocument(@RequestPart(value = "file") MultipartFile document, @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.uploadDocument(document, Long.parseLong(customerId));
     }
 
     @PostMapping("/extra-info")
     public OnbResponseDto extraInfo(@RequestBody CreateExtraInfoCommand request,
-                                    @RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.extraInfo(request, customerId);
+                                    @RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.extraInfo(request, Long.parseLong(customerId));
     }
 
     @PostMapping("/processing-info")
-    public OnbResponseDto processingInfo(@RequestAttribute("customerId") long customerId) {
-        return onboardingFacade.processingInfo(customerId);
+    public OnbResponseDto processingInfo(@RequestAttribute("customerId") String customerId) {
+        return onboardingFacade.processingInfo(Long.parseLong(customerId));
     }
 }

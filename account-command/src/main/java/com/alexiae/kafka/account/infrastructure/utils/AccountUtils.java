@@ -1,4 +1,4 @@
-package com.alexiae.kafka.account.infrastructure.util;
+package com.alexiae.kafka.account.infrastructure.utils;
 
 import java.util.Random;
 

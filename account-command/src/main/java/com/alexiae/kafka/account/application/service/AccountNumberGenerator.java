@@ -2,7 +2,7 @@ package com.alexiae.kafka.account.application.service;
 
 
 import com.alexiae.kafka.account.domain.port.AccountPersistencePort;
-import com.alexiae.kafka.account.infrastructure.util.AccountUtils;
+import com.alexiae.kafka.account.infrastructure.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

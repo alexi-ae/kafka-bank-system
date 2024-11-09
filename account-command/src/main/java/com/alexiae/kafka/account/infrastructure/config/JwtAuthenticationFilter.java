@@ -1,5 +1,8 @@
 package com.alexiae.kafka.account.infrastructure.config;
 
+import com.alexiae.kafka.account.domain.exception.ApiRestException;
+import com.alexiae.kafka.account.domain.exception.ErrorReason;
+import com.alexiae.kafka.account.domain.exception.ErrorSource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,36 +35,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.substring(7);
+        if (token != null) {
 
-        if (token != null && jwtService.validateToken(token)) {
-            String username = jwtService.getUsernameFromToken(token);
+            if (Boolean.FALSE.equals(jwtService.validateToken(token))) {
+                handleCustomException(response, ApiRestException.builder()
+                        .reason(ErrorReason.UNAUTHORIZED)
+                        .source(ErrorSource.BUSINESS_SERVICE)
+                        .build());
+                return;
+            }
+
             List<GrantedAuthority> authorities = jwtService.getAuthoritiesFromToken(token);
             String customerId = jwtService.getCustomerIdFromToken(token);
             request.setAttribute("customerId", customerId);
-            // Configura la autenticación en el contexto de Spring Security
+
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     null, null, authorities);
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-//        if (Boolean.TRUE.equals(jwtService.validateToken(token))) {
-//            // Extraer la identidad y los roles del token
-//            String username = jwtService.getUsernameFromToken(token);
-//            List<GrantedAuthority> authorities = jwtService.getAuthoritiesFromToken(token);
-//            String customerId = jwtService.getCustomerIdFromToken(token);
-//            request.setAttribute("customerId", customerId);
-//
-//            if (username != null) {
-//                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-//                        username, null, authorities);
-//                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//
-//                SecurityContextHolder.getContext().setAuthentication(authToken);
-//            }
-//        }
-        // Continuar con la cadena de filtros
         filterChain.doFilter(request, response);
+    }
+
+    private void handleCustomException(HttpServletResponse response, ApiRestException ex) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"code\": \"" + ex.getReason().getErrorCode() + "\", \"reason\": \"" + ex.getReason().name() + "\" ,\"source\": \"" + ex.getSource().name() + "\"}");
+        response.getWriter().flush();
     }
 }

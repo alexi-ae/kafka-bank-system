@@ -1,7 +1,6 @@
 package com.alexiae.kafka.account.application.usecases.impl;
 
 import com.alexiae.kafka.account.application.command.CreateAccountCommand;
-import com.alexiae.kafka.account.application.mapper.AccountMapper;
 import com.alexiae.kafka.account.application.service.AccountNumberGenerator;
 import com.alexiae.kafka.account.application.usecases.CreateAccountService;
 import com.alexiae.kafka.account.domain.enums.AccountCurrency;
@@ -21,9 +20,6 @@ public class CreateAccountServiceImpl implements CreateAccountService {
     private AccountPersistencePort accountPersistencePort;
 
     @Autowired
-    private AccountMapper accountMapper;
-
-    @Autowired
     private AccountNumberGenerator accountNumberGenerator;
 
     @Override
@@ -38,7 +34,8 @@ public class CreateAccountServiceImpl implements CreateAccountService {
         String numberAccount = accountNumberGenerator.number();
         String numberAccountCci = accountNumberGenerator.numberCci(numberAccount, "001");
         String holder = command.getFirstName() + command.getLastName();
-        Account.builder()
+
+        Account account = Account.builder()
                 .number(numberAccount)
                 .numberCci(numberAccountCci)
                 .isMain(Boolean.TRUE)
@@ -52,7 +49,6 @@ public class CreateAccountServiceImpl implements CreateAccountService {
                 .dailyTransferLimit(BigDecimal.valueOf(2000.00))
                 .customerId(command.getCustomerId())
                 .build();
-        Account account = accountMapper.toModel(command);
 
         return accountPersistencePort.create(account);
     }

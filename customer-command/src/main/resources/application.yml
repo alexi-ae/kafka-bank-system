@@ -25,6 +25,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       topic:
         user-update: user-update-topic
+        account-create: account-create-topic
 
 security:
   jwt:

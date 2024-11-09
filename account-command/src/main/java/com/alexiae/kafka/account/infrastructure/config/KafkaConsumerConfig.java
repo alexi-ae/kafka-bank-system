@@ -54,7 +54,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public NewTopic customerCreateTopic() {
+    public NewTopic accountCreateTopic() {
         return TopicBuilder.name(accountCreateTopic)
                 .partitions(1)
                 .replicas(1)

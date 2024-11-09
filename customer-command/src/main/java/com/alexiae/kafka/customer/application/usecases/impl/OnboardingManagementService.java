@@ -4,11 +4,13 @@ import com.alexiae.kafka.customer.application.command.*;
 import com.alexiae.kafka.customer.application.mapper.ContactMapper;
 import com.alexiae.kafka.customer.application.mapper.DocumentMapper;
 import com.alexiae.kafka.customer.application.mapper.ExtraInfoMapper;
+import com.alexiae.kafka.customer.application.port.out.AccountEventProducer;
 import com.alexiae.kafka.customer.application.usecases.OnboardingService;
 import com.alexiae.kafka.customer.domain.dto.OnbResponseDto;
 import com.alexiae.kafka.customer.domain.enums.CustomerStatus;
 import com.alexiae.kafka.customer.domain.enums.FileType;
 import com.alexiae.kafka.customer.domain.enums.OnboardingStatus;
+import com.alexiae.kafka.customer.domain.event.CreateAccountEvent;
 import com.alexiae.kafka.customer.domain.model.*;
 import com.alexiae.kafka.customer.domain.port.*;
 import lombok.SneakyThrows;
@@ -45,6 +47,9 @@ public class OnboardingManagementService implements OnboardingService {
 
     @Autowired
     private ExtraInfoMapper extraInfoMapper;
+
+    @Autowired
+    private AccountEventProducer accountEventProducer;
 
     @Override
     public OnbResponseDto saveContact(CreateContactCommand request, long customerId) {
@@ -134,6 +139,11 @@ public class OnboardingManagementService implements OnboardingService {
         customer.setNextState(OnboardingStatus.HOME);
         customer.setStatus(CustomerStatus.APPROVED);
         customer = customerPersistencePort.update(customer);
+        accountEventProducer.produceAccountCreateEvent(CreateAccountEvent.builder()
+                .customerId(customerId)
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .build());
         return OnbResponseDto.builder().nextState(customer.getNextState().name()).build();
     }
 

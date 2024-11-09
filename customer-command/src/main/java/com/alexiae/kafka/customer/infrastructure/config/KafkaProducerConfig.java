@@ -1,5 +1,6 @@
 package com.alexiae.kafka.customer.infrastructure.config;
 
+import com.alexiae.kafka.customer.domain.event.CreateAccountEvent;
 import com.alexiae.kafka.customer.domain.event.UpdateUserEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -27,6 +28,9 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.producer.topic.user-update}")
     private String userUpdateTopic;
 
+    @Value("${spring.kafka.producer.topic.account-create}")
+    private String accountCreateTopic;
+
     private Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -46,8 +50,21 @@ public class KafkaProducerConfig {
     }
 
     @Bean
+    public KafkaTemplate<String, CreateAccountEvent> createAccountEventKafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
     public NewTopic userUpdateTopic() {
         return TopicBuilder.name(userUpdateTopic)
+                .partitions(1)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic accountCreateTopic() {
+        return TopicBuilder.name(accountCreateTopic)
                 .partitions(1)
                 .replicas(1)
                 .build();

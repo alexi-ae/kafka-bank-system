@@ -31,6 +31,7 @@
         <module>auth-command</module>
         <module>customer-command</module>
         <module>account-command</module>
+        <module>transaction-command</module>
     </modules>
 
     <properties>

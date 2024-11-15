@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db-bank-system
+    username: userbanksystem
+    password: sql
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+security:
+  jwt:
+    time: 1000
+    secret: 33743677397A24432646294A404D635166546A576E5A7234753778214125442A
+  get:
+    token:
+      uri: /authenticate

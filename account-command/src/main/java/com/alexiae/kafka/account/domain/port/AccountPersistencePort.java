@@ -8,4 +8,9 @@ public interface AccountPersistencePort {
     boolean existsByCustomerId(Long customerId);
 
     boolean existsByNumber(String numberAccount);
+
+    Account getById(Long id);
+
+    Account update(Account account);
+
 }

@@ -1,6 +1,7 @@
 package com.alexiae.kafka.account.infrastructure.config;
 
 import com.alexiae.kafka.account.domain.event.CreateAccountEvent;
+import com.alexiae.kafka.account.domain.event.DepositTransactionEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -28,6 +29,9 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.consumer.topic.account-create}")
     private String accountCreateTopic;
 
+    @Value("${spring.kafka.consumer.topic.transaction-deposit}")
+    private String transactionDepositTopic;
+
 
     private Map<String, Object> consumerConfigs() {
         Map<String, Object> config = new HashMap<>();
@@ -51,6 +55,21 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String, CreateAccountEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory(CreateAccountEvent.class));
         return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, DepositTransactionEvent> transactionDepositKafkaListenerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, DepositTransactionEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(DepositTransactionEvent.class));
+        return factory;
+    }
+
+    @Bean
+    public NewTopic transactionDepositTopic() {
+        return TopicBuilder.name(transactionDepositTopic)
+                .partitions(1)
+                .replicas(1)
+                .build();
     }
 
     @Bean

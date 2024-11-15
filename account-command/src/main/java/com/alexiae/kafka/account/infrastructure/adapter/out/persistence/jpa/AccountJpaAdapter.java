@@ -31,4 +31,14 @@ public class AccountJpaAdapter implements AccountPersistencePort {
     public boolean existsByNumber(String numberAccount) {
         return accountRepository.existsAccountEntitiesByNumber(numberAccount);
     }
+
+    @Override
+    public Account getById(Long id) {
+        return accountRepository.findById(id).map(accountEntityMapper::toModel).orElse(null);
+    }
+
+    @Override
+    public Account update(Account account) {
+        return accountEntityMapper.toModel(accountRepository.save(accountEntityMapper.toEntity(account)));
+    }
 }

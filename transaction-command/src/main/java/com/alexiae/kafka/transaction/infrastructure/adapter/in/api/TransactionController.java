@@ -15,8 +15,8 @@ public class TransactionController {
     @Autowired
     private CreateTransactionService createTransactionService;
 
-    @PostMapping("/init")
-    public TransactionInitiatedResponse init(@RequestBody TransactionInitiatedRequest request,
+    @PostMapping("/deposit")
+    public TransactionInitiatedResponse deposit(@RequestBody TransactionInitiatedRequest request,
                                                 @RequestAttribute("customerId") String customerId) {
         return createTransactionService.init(request, Long.parseLong(customerId));
     }

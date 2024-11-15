@@ -1,10 +1,12 @@
 package com.alexiae.kafka.transaction.application.usecases.impl;
 
 import com.alexiae.kafka.transaction.application.mapper.TransactionMapper;
+import com.alexiae.kafka.transaction.application.port.out.TransactionEventProducer;
 import com.alexiae.kafka.transaction.application.usecases.CreateTransactionService;
 import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedRequest;
 import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedResponse;
 import com.alexiae.kafka.transaction.domain.enums.MovementType;
+import com.alexiae.kafka.transaction.domain.event.DepositTransactionEvent;
 import com.alexiae.kafka.transaction.domain.model.Transaction;
 import com.alexiae.kafka.transaction.domain.model.TransactionMovement;
 import com.alexiae.kafka.transaction.domain.port.TransactionMovementsPersistencePort;
@@ -23,6 +25,9 @@ public class CreateTransactionServiceImpl implements CreateTransactionService {
 
     @Autowired
     private TransactionMapper transactionMapper;
+
+    @Autowired
+    private TransactionEventProducer transactionEventProducer;
 
     @Override
     public TransactionInitiatedResponse init(TransactionInitiatedRequest request, Long customerId) {
@@ -44,6 +49,14 @@ public class CreateTransactionServiceImpl implements CreateTransactionService {
                 .movementType(MovementType.RECEIVED)
                 .build();
         transactionMovementsPersistencePort.create(destiny);
+
+        transactionEventProducer.publishTransactionDepositEvent(DepositTransactionEvent.builder()
+                .originAccountId(transaction.getOriginAccountId())
+                .destinationAccountId(transaction.getDestinationAccountId())
+                .amount(transaction.getAmount())
+                .customerId(customerId)
+                .build());
+
         return TransactionInitiatedResponse.builder().build();
     }
 }

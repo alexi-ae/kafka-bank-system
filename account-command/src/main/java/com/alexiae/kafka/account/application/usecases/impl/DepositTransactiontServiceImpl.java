@@ -1,8 +1,10 @@
 package com.alexiae.kafka.account.application.usecases.impl;
 
 import com.alexiae.kafka.account.application.command.DepositTransactionCommand;
+import com.alexiae.kafka.account.application.port.out.TransactionEventProducer;
 import com.alexiae.kafka.account.application.usecases.DepositTransactionService;
 import com.alexiae.kafka.account.domain.enums.AccountStatus;
+import com.alexiae.kafka.account.domain.event.DepositTransactionResultEvent;
 import com.alexiae.kafka.account.domain.exception.ApiRestException;
 import com.alexiae.kafka.account.domain.exception.ErrorReason;
 import com.alexiae.kafka.account.domain.exception.ErrorSource;
@@ -16,6 +18,9 @@ public class DepositTransactiontServiceImpl implements DepositTransactionService
 
     @Autowired
     private AccountPersistencePort accountPersistencePort;
+
+    @Autowired
+    private TransactionEventProducer transactionEventProducer;
 
 
     @Override
@@ -36,10 +41,17 @@ public class DepositTransactiontServiceImpl implements DepositTransactionService
             accountPersistencePort.update(originAccount);
             destinyAccount.setCurrentBalance(destinyAccount.getCurrentBalance().add(command.getAmount()));
             accountPersistencePort.update(destinyAccount);
-            // responder kafka
+            // responder kafka ok
+            transactionEventProducer.publishTransactionDepositResultEvent(DepositTransactionResultEvent.builder()
+                    .transactionId(command.getTransactionId())
+                    .status("DEPOSITED")
+                    .build());
         } catch (Exception e) {
             // responder kafka con error - compensacion
-
+            transactionEventProducer.publishTransactionDepositResultEvent(DepositTransactionResultEvent.builder()
+                    .transactionId(command.getTransactionId())
+                    .status("CANCELLED")
+                    .build());
         }
     }
 

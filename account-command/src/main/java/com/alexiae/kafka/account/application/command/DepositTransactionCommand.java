@@ -21,5 +21,5 @@ public class DepositTransactionCommand {
 
     private BigDecimal amount;
 
-
+    private Long transactionId;
 }

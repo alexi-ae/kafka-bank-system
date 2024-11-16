@@ -17,6 +17,7 @@ public class TransactionEventConsumerAdapter {
             containerFactory = "transactionDepositKafkaListenerFactory")
     public void deposit(DepositTransactionEvent event) {
         depositTransactionService.execute(DepositTransactionCommand.builder()
+                .transactionId(event.getTransactionId())
                 .originAccountId(event.getOriginAccountId())
                 .destinationAccountId(event.getDestinationAccountId())
                 .customerId(event.getCustomerId())

@@ -1,6 +1,7 @@
 package com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.entity;
 
 import com.alexiae.kafka.transaction.domain.enums.MovementType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class TransactionMovementEntity {
 
     @ManyToOne
     @JoinColumn(name = "transaction_id", nullable = false)
+    @JsonIgnore
     private TransactionEntity transaction;
 
     @Column(name = "account_id", nullable = false)

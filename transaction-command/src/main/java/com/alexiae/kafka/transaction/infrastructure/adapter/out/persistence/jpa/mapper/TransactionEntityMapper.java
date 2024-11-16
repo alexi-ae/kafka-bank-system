@@ -11,6 +11,6 @@ public interface TransactionEntityMapper {
     @Mapping(target = "movements", ignore = true)
     TransactionEntity toEntity(Transaction model);
 
-
+    @Mapping(target = "movements", ignore = true)
     Transaction toModel(TransactionEntity save);
 }

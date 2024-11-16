@@ -4,5 +4,14 @@ public enum TransactionStatus {
     SUCCESS,
     ERROR,
     PROGRESS,
-    PENDING
+    PENDING,
+    DEPOSITED;
+
+    public static TransactionStatus getByKey(String key) {
+        try {
+            return TransactionStatus.valueOf(key.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return ERROR;
+        }
+    }
 }

@@ -23,4 +23,16 @@ public class TransactionJpaAdapter implements TransactionPersistencePort {
         TransactionEntity entity = transactionEntityMapper.toEntity(model);
         return transactionEntityMapper.toModel(transactionRepository.save(entity));
     }
+
+    @Override
+    public Transaction getById(Long id) {
+        return transactionRepository.findById(id).map(transactionEntityMapper::toModel).orElse(null);
+    }
+
+    @Override
+    public Transaction update(Transaction model) {
+        TransactionEntity entity = transactionEntityMapper.toEntity(model);
+        entity = transactionRepository.save(entity);
+        return transactionEntityMapper.toModel(entity);
+    }
 }

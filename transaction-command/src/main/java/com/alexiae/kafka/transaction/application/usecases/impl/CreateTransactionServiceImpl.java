@@ -51,12 +51,14 @@ public class CreateTransactionServiceImpl implements CreateTransactionService {
         transactionMovementsPersistencePort.create(destiny);
 
         transactionEventProducer.publishTransactionDepositEvent(DepositTransactionEvent.builder()
+                .transactionId(transaction.getId())
                 .originAccountId(transaction.getOriginAccountId())
                 .destinationAccountId(transaction.getDestinationAccountId())
                 .amount(transaction.getAmount())
                 .customerId(customerId)
                 .build());
 
-        return TransactionInitiatedResponse.builder().build();
+        return TransactionInitiatedResponse.builder()
+                .transactionId(transaction.getId()).status("PENDING").build();
     }
 }

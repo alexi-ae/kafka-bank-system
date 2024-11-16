@@ -1,6 +1,7 @@
 package com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.entity;
 
 import com.alexiae.kafka.transaction.domain.enums.TransactionStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,7 +47,8 @@ public class TransactionEntity {
     }
 
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private List<TransactionMovementEntity> movements = new ArrayList<>();
 
 }

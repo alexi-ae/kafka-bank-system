@@ -10,9 +10,5 @@ import lombok.Setter;
 public class TransactionInitiatedResponse {
 
     private Long transactionId;
-    private Long status;
-
-    private Long movementOrigin;
-    private Long movementDestiny;
-
+    private String status;
 }

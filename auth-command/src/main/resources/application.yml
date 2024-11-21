@@ -1,35 +1,5 @@
-server:
-  port: 8080
 spring:
-  data:
-    mongodb:
-      uri: mongodb://authdb:nosql@localhost:27017
-      database: authdb
-    redis:
-      host: localhost
-      port: 6379
-      password: authdb
-      timeout: 60000
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: customer-group-id       # Nombre del grupo de consumidores
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      topic:
-        user-update: user-update-topic
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      topic:
-        customer-create: customer-create-topic
-
-security:
-  jwt:
-    time: 1000
-    secret: 33743677397A24432646294A404D635166546A576E5A7234753778214125442A
-  get:
-    token:
-      uri: /authenticate
+  application:
+    name: auth-command
+  config:
+    import: optional:configserver:http://localhost:9000

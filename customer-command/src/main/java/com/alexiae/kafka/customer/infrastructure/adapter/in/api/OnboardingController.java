@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/ob")
+@RequestMapping("/customer/ob")
 public class OnboardingController {
 
     @Autowired

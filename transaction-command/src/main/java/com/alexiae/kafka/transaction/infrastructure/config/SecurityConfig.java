@@ -18,13 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/v1/auth/login",
-            "/api/v1/auth/register",
-            "/auth/**",
-            "/ob/register",
             "/h2-console",
             "/h2-console/**"
-
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -43,8 +38,7 @@ public class SecurityConfig {
                         AbstractHttpConfigurer::disable) // Disabling CSRF as we use JWT which is immune to CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(WHITE_LIST_URL).permitAll() // Whitelisting some paths from authentication
-                        .requestMatchers("/ob/**").hasAnyRole("USER", "CUSTOMER")
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/transaction/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()) // All other requests must be authenticated
                 //.authenticationProvider(authenticationProvider)
                 .sessionManagement(session -> session

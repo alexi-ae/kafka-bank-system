@@ -21,13 +21,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/v1/auth/login",
-            "/api/v1/auth/register",
-            "/auth/**",
-            "/ob/register",
             "/h2-console",
-            "/h2-console/**"
-
+            "/h2-console/**",
+            "/auth/login",
+            "/auth/register",
     };
 
     @Autowired

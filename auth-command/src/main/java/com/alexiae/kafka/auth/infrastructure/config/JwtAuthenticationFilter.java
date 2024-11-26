@@ -33,7 +33,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Value("${security.jwt.secret}")
     private String secretKey;
 
-    private final TokenServiceImpl tokenService;
+    @Autowired
+    private TokenServiceImpl tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

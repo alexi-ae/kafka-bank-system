@@ -1,0 +1,191 @@
+version: "3.8"
+
+networks:
+  bank-system-network:
+    driver: bridge
+    external: true
+
+services:
+  zookeeper:
+    image: zookeeper:3.7
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - bank-system-network
+  kafka:
+    image: confluentinc/cp-kafka:latest  # Kafka oficial
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    networks:
+      - bank-system-network
+  # Servicio para MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: authdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: authdb
+      MONGO_INITDB_ROOT_PASSWORD: nosql
+      MONGO_INITDB_DATABASE: authdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - bank-system-network
+    depends_on:
+      - zookeeper
+      - kafka
+  # Servicio para Redis
+  redis:
+    image: redis:latest
+    container_name: redis
+    environment:
+      REDIS_PASSWORD: authdb
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - bank-system-network
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongodb
+
+  auth-command:
+    build:
+      context: .
+      dockerfile: auth-command/Dockerfile
+    container_name: auth-command
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_APPLICATION_NAME=auth-command
+      - CONFIG_SERVER_URL=http://config-server:9000
+    networks:
+      - bank-system-network
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongodb
+      - redis
+  
+  customer-command:
+    build:
+      context: .
+      dockerfile: customer-command/Dockerfile
+    container_name: customer-command
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_APPLICATION_NAME=customer-command
+      - CONFIG_SERVER_URL=http://config-server:9000
+    networks:
+      - bank-system-network
+    depends_on:
+      - auth-command
+      - customer-db
+
+  account-command:
+    build:
+      context: .
+      dockerfile: account-command/Dockerfile
+    container_name: account-command
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_APPLICATION_NAME=account-command
+      - CONFIG_SERVER_URL=http://config-server:9000
+    networks:
+      - bank-system-network
+    depends_on:
+      - auth-command
+      - account-db
+
+  transaction-command:
+    build:
+      context: .
+      dockerfile: transaction-command/Dockerfile
+    container_name: transaction-command
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_APPLICATION_NAME=transaction-command
+      - CONFIG_SERVER_URL=http://config-server:9000
+    networks:
+      - bank-system-network
+    depends_on:
+      - auth-command
+      - transaction-db
+
+
+  customer-db:
+    image: postgres:15  # Usamos la versión 15 de PostgreSQL
+    container_name: customer-db
+    environment:
+      POSTGRES_USER: userbanksystem
+      POSTGRES_PASSWORD: sql
+      POSTGRES_DB: db_customer  # Nombre de la base de datos con prefijo "db_"
+    volumes:
+      - customer-data:/var/lib/postgresql/data
+    networks:
+      - bank-system-network  
+    ports:
+      - "5433:5432"  # Exponemos el puerto 5433 para el cliente de Customer
+
+  account-db:
+    image: postgres:15  # Usamos la versión 15 de PostgreSQL
+    container_name: account-db
+    environment:
+      POSTGRES_USER: userbanksystem
+      POSTGRES_PASSWORD: sql
+      POSTGRES_DB: db_account  # Nombre de la base de datos con prefijo "db_"
+    volumes:
+      - account-data:/var/lib/postgresql/data
+    networks:
+      - bank-system-network  
+    ports:
+      - "5434:5432"  # Exponemos el puerto 5433 para el cliente de Customer
+
+  transaction-db:
+    image: postgres:15  # Usamos la versión 15 de PostgreSQL
+    container_name: transaction-db
+    environment:
+      POSTGRES_USER: userbanksystem
+      POSTGRES_PASSWORD: sql
+      POSTGRES_DB: db_transaction  # Nombre de la base de datos con prefijo "db_"
+    volumes:
+      - transaction-data:/var/lib/postgresql/data
+    networks:
+      - bank-system-network  
+    ports:
+      - "5435:5432"  # Exponemos el puerto 5433 para el cliente de Customer
+
+volumes:
+  kafka-data:
+  mongodb-data:
+  redis-data:
+  customer-data:
+  account-data:
+  transaction-data:

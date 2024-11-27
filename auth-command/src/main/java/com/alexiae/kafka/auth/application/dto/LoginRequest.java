@@ -1,12 +1,11 @@
-package com.alexiae.kafka.auth.application.command;
-
+package com.alexiae.kafka.auth.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateUserCommand {
+public class LoginRequest {
     private String email;
     private String password;
 }

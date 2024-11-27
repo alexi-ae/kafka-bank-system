@@ -1,4 +1,4 @@
-package com.alexiae.kafka.auth.domain.dto;
+package com.alexiae.kafka.auth.application.dto;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseLoginDto {
+public class LoginResponse {
     private String token;
 }

@@ -1,9 +1,9 @@
-package com.alexiae.kafka.auth.application.usecases.impl;
+package com.alexiae.kafka.auth.application.usecases;
 
-import com.alexiae.kafka.auth.application.services.TokenRedisService;
-import com.alexiae.kafka.auth.application.services.TokenService;
-import com.alexiae.kafka.auth.application.usecases.LogoutUserUseCase;
 import com.alexiae.kafka.auth.domain.model.Token;
+import com.alexiae.kafka.auth.domain.port.in.LogoutUserUseCase;
+import com.alexiae.kafka.auth.domain.port.out.TokenPort;
+import com.alexiae.kafka.auth.domain.port.out.TokenRedisPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ import java.time.ZoneId;
 public class LogoutUserUseCaseImpl implements LogoutUserUseCase {
 
     @Autowired
-    private TokenRedisService tokenRedisService;
+    private TokenRedisPort tokenRedisPort;
 
     @Autowired
-    private TokenService tokenService;
+    private TokenPort tokenPort;
 
 
     @Override
@@ -26,11 +26,11 @@ public class LogoutUserUseCaseImpl implements LogoutUserUseCase {
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
-        Token tokenInfo = tokenService.getInfo(token);
+        Token tokenInfo = tokenPort.getInfo(token);
         long ttlInMillis = Duration.between(Instant.now(), tokenInfo.getExpiresAt().atZone(ZoneId.systemDefault()).toInstant()).toMillis();
 
         if (ttlInMillis > 0) {
-            tokenRedisService.revokeToken(token, ttlInMillis);
+            tokenRedisPort.revokeToken(token, ttlInMillis);
         }
     }
 }

@@ -17,10 +17,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (roleRepository.count() == 0) { // Verifica si hay registros
-            roleRepository.save(new RoleEntity(null, "ADMIN"));
-            roleRepository.save(new RoleEntity(null, "USER"));
-            roleRepository.save(new RoleEntity(null, "CUSTOMER"));
+        try {
+            if (roleRepository.count() == 0) { // Verifica si hay registros
+                roleRepository.save(new RoleEntity(null, "ADMIN"));
+                roleRepository.save(new RoleEntity(null, "USER"));
+                roleRepository.save(new RoleEntity(null, "CUSTOMER"));
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo inicializar los datos por conectividad.");
         }
     }
 }

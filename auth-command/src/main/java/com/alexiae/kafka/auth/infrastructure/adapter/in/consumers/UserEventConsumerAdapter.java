@@ -1,7 +1,7 @@
 package com.alexiae.kafka.auth.infrastructure.adapter.in.consumers;
 
 import com.alexiae.kafka.auth.domain.event.UpdateUserEvent;
-import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
+import com.alexiae.kafka.auth.domain.port.out.UserPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

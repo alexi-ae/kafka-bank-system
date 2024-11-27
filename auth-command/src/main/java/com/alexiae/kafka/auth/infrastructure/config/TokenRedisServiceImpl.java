@@ -1,6 +1,6 @@
 package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexiae.kafka.auth.application.services.TokenRedisService;
+import com.alexiae.kafka.auth.domain.port.out.TokenRedisPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
-public class TokenRedisServiceImpl implements TokenRedisService {
+public class TokenRedisServiceImpl implements TokenRedisPort {
 
     private final RedisTemplate<String, Object> redisTemplate;
     private static final String REVOKED_TOKEN_PREFIX = "revokedToken:";

@@ -1,8 +1,8 @@
 package com.alexiae.kafka.auth.infrastructure.config;
 
-import com.alexiae.kafka.auth.application.services.TokenService;
 import com.alexiae.kafka.auth.domain.model.Token;
 import com.alexiae.kafka.auth.domain.model.User;
+import com.alexiae.kafka.auth.domain.port.out.TokenPort;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Component
-public class TokenServiceImpl implements TokenService {
+public class TokenServiceImpl implements TokenPort {
 
     @Value("${security.jwt.time}")
     private long JWT_TOKEN_VALIDITY;
@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
     private String secretKey;
 
     @Override
-    public String generateToken(User user) {
+    public String generate(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         claims.put("email", user.getEmail());

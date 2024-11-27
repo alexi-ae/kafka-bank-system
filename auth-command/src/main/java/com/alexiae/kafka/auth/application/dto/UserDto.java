@@ -1,4 +1,4 @@
-package com.alexiae.kafka.auth.domain.dto;
+package com.alexiae.kafka.auth.application.dto;
 
 import lombok.Builder;
 import lombok.Data;

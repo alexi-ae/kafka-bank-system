@@ -1,14 +1,14 @@
-package com.alexiae.kafka.auth.application.usecases.impl;
+package com.alexiae.kafka.auth.application.usecases;
 
-import com.alexiae.kafka.auth.application.command.LoginCommand;
-import com.alexiae.kafka.auth.application.services.TokenService;
-import com.alexiae.kafka.auth.application.usecases.LoginUserUseCase;
-import com.alexiae.kafka.auth.domain.dto.ResponseLoginDto;
+import com.alexiae.kafka.auth.domain.command.LoginCommand;
 import com.alexiae.kafka.auth.domain.exception.ApiRestException;
 import com.alexiae.kafka.auth.domain.exception.ErrorReason;
 import com.alexiae.kafka.auth.domain.exception.ErrorSource;
+import com.alexiae.kafka.auth.domain.model.AuthToken;
 import com.alexiae.kafka.auth.domain.model.User;
-import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
+import com.alexiae.kafka.auth.domain.port.in.LoginUserUseCase;
+import com.alexiae.kafka.auth.domain.port.out.TokenPort;
+import com.alexiae.kafka.auth.domain.port.out.UserPersistencePort;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +24,7 @@ public class LoginUserUseCaseImpl implements LoginUserUseCase {
     private UserPersistencePort userPersistencePort;
 
     @Autowired
-    private TokenService tokenService;
+    private TokenPort tokenPort;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -32,11 +32,11 @@ public class LoginUserUseCaseImpl implements LoginUserUseCase {
 
     @SneakyThrows
     @Override
-    public ResponseLoginDto execute(LoginCommand command) {
+    public AuthToken execute(LoginCommand command) {
         authenticate(command.getEmail(), command.getPassword());
         User user = userPersistencePort.getByEmail(command.getEmail());
-        String tokenString = tokenService.generateToken(user);
-        return ResponseLoginDto.builder()
+        String tokenString = tokenPort.generate(user);
+        return AuthToken.builder()
                 .token(tokenString)
                 .build();
     }

@@ -1,12 +1,12 @@
-package com.alexiae.kafka.auth.application.usecases.impl;
+package com.alexiae.kafka.auth.application.usecases;
 
-import com.alexiae.kafka.auth.application.command.CreateUserCommand;
 import com.alexiae.kafka.auth.application.mapper.UserMapper;
 import com.alexiae.kafka.auth.application.port.out.CustomerEventPublisher;
-import com.alexiae.kafka.auth.application.usecases.RegisterUserUseCase;
+import com.alexiae.kafka.auth.domain.command.CreateUserCommand;
 import com.alexiae.kafka.auth.domain.event.CreateCustomerEvent;
 import com.alexiae.kafka.auth.domain.model.User;
-import com.alexiae.kafka.auth.domain.port.UserPersistencePort;
+import com.alexiae.kafka.auth.domain.port.in.RegisterUserUseCase;
+import com.alexiae.kafka.auth.domain.port.out.UserPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

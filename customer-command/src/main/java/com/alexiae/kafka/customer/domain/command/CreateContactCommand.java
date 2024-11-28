@@ -1,4 +1,4 @@
-package com.alexiae.kafka.customer.application.command;
+package com.alexiae.kafka.customer.domain.command;
 
 import lombok.Getter;
 import lombok.Setter;

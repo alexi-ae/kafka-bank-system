@@ -1,7 +1,7 @@
 package com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.customer.domain.model.Contact;
-import com.alexiae.kafka.customer.domain.port.ContactPersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.ContactPersistencePort;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.entity.ContactEntity;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.mapper.ContactEntityMapper;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.repository.ContactRepository;

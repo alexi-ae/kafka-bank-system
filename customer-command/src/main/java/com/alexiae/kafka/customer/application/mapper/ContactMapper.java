@@ -1,8 +1,8 @@
 package com.alexiae.kafka.customer.application.mapper;
 
 
-import com.alexiae.kafka.customer.application.command.CreateContactCommand;
-import com.alexiae.kafka.customer.application.command.CreatePersonalInfoCommand;
+import com.alexiae.kafka.customer.domain.command.CreateContactCommand;
+import com.alexiae.kafka.customer.domain.command.CreatePersonalInfoCommand;
 import com.alexiae.kafka.customer.domain.model.Contact;
 import com.alexiae.kafka.customer.domain.model.Customer;
 import org.mapstruct.Mapper;

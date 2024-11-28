@@ -1,7 +1,7 @@
 package com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.customer.domain.model.Document;
-import com.alexiae.kafka.customer.domain.port.DocumentPersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.DocumentPersistencePort;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.entity.DocumentEntity;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.mapper.DocumentEntityMapper;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.repository.DocumentRepository;

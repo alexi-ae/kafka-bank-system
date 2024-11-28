@@ -1,4 +1,4 @@
-package com.alexiae.kafka.customer.application.command;
+package com.alexiae.kafka.customer.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class CreatePersonalInfoCommand {
+public class CreatePersonalInfoRequest {
     private String firstName;
     private String lastName;
     @JsonFormat(pattern = "dd-MM-yyyy")

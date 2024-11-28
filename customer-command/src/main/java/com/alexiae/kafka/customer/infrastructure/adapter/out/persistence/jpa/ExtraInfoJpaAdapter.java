@@ -1,7 +1,7 @@
 package com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.customer.domain.model.ExtraInfo;
-import com.alexiae.kafka.customer.domain.port.ExtraInfoPersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.ExtraInfoPersistencePort;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.entity.ExtraInfoEntity;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.mapper.ExtraInfoEntityMapper;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.repository.ExtraInfoRepository;

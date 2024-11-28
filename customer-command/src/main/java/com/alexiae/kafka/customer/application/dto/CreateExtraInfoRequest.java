@@ -1,8 +1,12 @@
-package com.alexiae.kafka.customer.domain.dto;
+package com.alexiae.kafka.customer.application.dto;
 
-public class ExtraInfoDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    private Long id;
+@Getter
+@Setter
+public class CreateExtraInfoRequest {
+
     private boolean politicallyExposed;
     private String maritalStatus;
     private String documentType;

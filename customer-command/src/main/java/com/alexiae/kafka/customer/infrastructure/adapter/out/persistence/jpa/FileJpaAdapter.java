@@ -1,7 +1,7 @@
 package com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.customer.domain.model.File;
-import com.alexiae.kafka.customer.domain.port.FilePersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.FilePersistencePort;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.entity.FilesEntity;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.mapper.FileEntityMapper;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.repository.FileRepository;

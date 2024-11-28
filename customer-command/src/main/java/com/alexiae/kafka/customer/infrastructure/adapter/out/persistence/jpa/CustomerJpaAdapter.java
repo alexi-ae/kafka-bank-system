@@ -1,7 +1,7 @@
 package com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.customer.domain.model.Customer;
-import com.alexiae.kafka.customer.domain.port.CustomerPersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.CustomerPersistencePort;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.entity.CustomerEntity;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.mapper.CustomerEntityMapper;
 import com.alexiae.kafka.customer.infrastructure.adapter.out.persistence.jpa.repository.CustomerRepository;

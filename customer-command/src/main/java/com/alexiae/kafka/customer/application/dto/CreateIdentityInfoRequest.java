@@ -1,11 +1,11 @@
-package com.alexiae.kafka.customer.application.command;
+package com.alexiae.kafka.customer.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateIdentityInfoCommand {
+public class CreateIdentityInfoRequest {
 
     private String country;
     private String type;

@@ -1,6 +1,6 @@
 package com.alexiae.kafka.customer.infrastructure.config;
 
-import com.alexiae.kafka.customer.application.service.JwtService;
+import com.alexiae.kafka.customer.application.service.JwtServicePort;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtServiceImpl implements JwtService {
+public class JwtServiceImpl implements JwtServicePort {
 
     @Value("${security.jwt.secret}")
     private String secretKey;

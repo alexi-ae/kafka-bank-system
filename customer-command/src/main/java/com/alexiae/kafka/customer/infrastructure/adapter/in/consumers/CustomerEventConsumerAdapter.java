@@ -6,7 +6,7 @@ import com.alexiae.kafka.customer.domain.enums.OnboardingStatus;
 import com.alexiae.kafka.customer.domain.event.CreateCustomerEvent;
 import com.alexiae.kafka.customer.domain.event.UpdateUserEvent;
 import com.alexiae.kafka.customer.domain.model.Customer;
-import com.alexiae.kafka.customer.domain.port.CustomerPersistencePort;
+import com.alexiae.kafka.customer.domain.port.out.CustomerPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

@@ -19,6 +19,9 @@ WORKDIR /app
 # Copiar el JAR generado
 COPY --from=build /app/customer-command/target/*.jar app.jar
 
+# Establecer el perfil activo (prod) al ejecutar el contenedor
+ENV SPRING_PROFILES_ACTIVE=prod
+
 # Exponer el puerto del microservicio
 EXPOSE 8081
 

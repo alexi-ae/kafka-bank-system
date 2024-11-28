@@ -1,0 +1,59 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: auth-command
+  data:
+    mongodb:
+      uri: mongodb://authdb:nosql@localhost:27017
+      database: authdb
+    redis:
+      host: localhost
+      port: 6379
+      password: authdb
+      timeout: 60000
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: customer-group-id       # Nombre del grupo de consumidores
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      topic:
+        user-update: user-update-topic
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      topic:
+        customer-create: customer-create-topic
+    discovery:
+      enabled: true # Habilita la funcionalidad de descubrimiento
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Dirección del servidor Eureka
+    register-with-eureka: true # Permite registrarse en Eureka
+    fetch-registry: true # Obtiene el registro de servicios de Eureka
+  instance:
+    prefer-ip-address: true # Utiliza la IP en lugar del hostname
+
+security:
+  jwt:
+    time: 1000
+    secret: 33743677397A24432646294A404D635166546A576E5A7234753778214125442A
+  get:
+    token:
+      uri: /authenticate
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info   # Habilita múltiples endpoints
+  endpoint:
+    refresh:
+      enabled: true

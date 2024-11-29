@@ -1,7 +1,7 @@
 package com.alexiae.kafka.account.infrastructure.adapter.in.consumers;
 
-import com.alexiae.kafka.account.application.command.CreateAccountCommand;
-import com.alexiae.kafka.account.application.usecases.CreateAccountService;
+import com.alexiae.kafka.account.domain.command.CreateAccountCommand;
+import com.alexiae.kafka.account.domain.port.in.CreateAccountUseCase;
 import com.alexiae.kafka.account.domain.event.CreateAccountEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class AccountEventConsumerAdapter {
 
     @Autowired
-    private CreateAccountService createAccountService;
+    private CreateAccountUseCase createAccountService;
 
     @KafkaListener(topics = "account-create-topic", groupId = "customer-group-id",
             containerFactory = "accountCreateKafkaListenerFactory")

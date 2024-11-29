@@ -1,7 +1,7 @@
 package com.alexiae.kafka.account.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.account.domain.model.Account;
-import com.alexiae.kafka.account.domain.port.AccountPersistencePort;
+import com.alexiae.kafka.account.domain.port.out.AccountPersistencePort;
 import com.alexiae.kafka.account.infrastructure.adapter.out.persistence.jpa.mapper.AccountEntityMapper;
 import com.alexiae.kafka.account.infrastructure.adapter.out.persistence.jpa.repository.AccountRepository;
 import jakarta.transaction.Transactional;

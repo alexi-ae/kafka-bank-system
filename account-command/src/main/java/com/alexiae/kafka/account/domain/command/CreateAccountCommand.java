@@ -1,4 +1,4 @@
-package com.alexiae.kafka.account.application.command;
+package com.alexiae.kafka.account.domain.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

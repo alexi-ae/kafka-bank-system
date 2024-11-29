@@ -1,6 +1,6 @@
 package com.alexiae.kafka.account.application.mapper;
 
-import com.alexiae.kafka.account.application.command.CreateAccountCommand;
+import com.alexiae.kafka.account.domain.command.CreateAccountCommand;
 import com.alexiae.kafka.account.domain.model.Account;
 import org.mapstruct.Mapper;
 

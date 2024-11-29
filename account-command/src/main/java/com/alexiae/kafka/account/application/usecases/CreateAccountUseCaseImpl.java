@@ -1,13 +1,13 @@
-package com.alexiae.kafka.account.application.usecases.impl;
+package com.alexiae.kafka.account.application.usecases;
 
-import com.alexiae.kafka.account.application.command.CreateAccountCommand;
+import com.alexiae.kafka.account.domain.command.CreateAccountCommand;
 import com.alexiae.kafka.account.application.service.AccountNumberGenerator;
-import com.alexiae.kafka.account.application.usecases.CreateAccountService;
+import com.alexiae.kafka.account.domain.port.in.CreateAccountUseCase;
 import com.alexiae.kafka.account.domain.enums.AccountCurrency;
 import com.alexiae.kafka.account.domain.enums.AccountStatus;
 import com.alexiae.kafka.account.domain.enums.AccountType;
 import com.alexiae.kafka.account.domain.model.Account;
-import com.alexiae.kafka.account.domain.port.AccountPersistencePort;
+import com.alexiae.kafka.account.domain.port.out.AccountPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Service
-public class CreateAccountServiceImpl implements CreateAccountService {
+public class CreateAccountUseCaseImpl implements CreateAccountUseCase {
     @Autowired
     private AccountPersistencePort accountPersistencePort;
 

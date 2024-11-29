@@ -1,20 +1,20 @@
-package com.alexiae.kafka.account.application.usecases.impl;
+package com.alexiae.kafka.account.application.usecases;
 
-import com.alexiae.kafka.account.application.command.DepositTransactionCommand;
+import com.alexiae.kafka.account.domain.command.DepositTransactionCommand;
 import com.alexiae.kafka.account.application.port.out.TransactionEventProducer;
-import com.alexiae.kafka.account.application.usecases.DepositTransactionService;
+import com.alexiae.kafka.account.domain.port.in.DepositTransactionUseCase;
 import com.alexiae.kafka.account.domain.enums.AccountStatus;
 import com.alexiae.kafka.account.domain.event.DepositTransactionResultEvent;
 import com.alexiae.kafka.account.domain.exception.ApiRestException;
 import com.alexiae.kafka.account.domain.exception.ErrorReason;
 import com.alexiae.kafka.account.domain.exception.ErrorSource;
 import com.alexiae.kafka.account.domain.model.Account;
-import com.alexiae.kafka.account.domain.port.AccountPersistencePort;
+import com.alexiae.kafka.account.domain.port.out.AccountPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DepositTransactiontServiceImpl implements DepositTransactionService {
+public class DepositTransactionUseCaseImpl implements DepositTransactionUseCase {
 
     @Autowired
     private AccountPersistencePort accountPersistencePort;

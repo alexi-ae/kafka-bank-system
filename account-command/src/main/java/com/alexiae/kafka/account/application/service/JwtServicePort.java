@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public interface JwtService {
+public interface JwtServicePort {
 
     boolean validateToken(String token);
 

@@ -1,4 +1,4 @@
-package com.alexiae.kafka.account.domain.port;
+package com.alexiae.kafka.account.domain.port.out;
 
 import com.alexiae.kafka.account.domain.model.Account;
 

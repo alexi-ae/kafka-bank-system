@@ -1,7 +1,7 @@
 package com.alexiae.kafka.account.infrastructure.adapter.in.consumers;
 
-import com.alexiae.kafka.account.application.command.DepositTransactionCommand;
-import com.alexiae.kafka.account.application.usecases.DepositTransactionService;
+import com.alexiae.kafka.account.domain.command.DepositTransactionCommand;
+import com.alexiae.kafka.account.domain.port.in.DepositTransactionUseCase;
 import com.alexiae.kafka.account.domain.event.DepositTransactionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class TransactionEventConsumerAdapter {
 
     @Autowired
-    private DepositTransactionService depositTransactionService;
+    private DepositTransactionUseCase depositTransactionService;
 
     @KafkaListener(topics = "transaction-deposit-topic", groupId = "customer-group-id",
             containerFactory = "transactionDepositKafkaListenerFactory")

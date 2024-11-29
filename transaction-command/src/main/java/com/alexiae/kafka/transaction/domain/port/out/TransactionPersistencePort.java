@@ -1,4 +1,4 @@
-package com.alexiae.kafka.transaction.domain.port;
+package com.alexiae.kafka.transaction.domain.port.out;
 
 import com.alexiae.kafka.transaction.domain.model.Transaction;
 

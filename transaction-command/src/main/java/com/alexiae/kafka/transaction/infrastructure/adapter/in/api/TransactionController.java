@@ -1,8 +1,8 @@
 package com.alexiae.kafka.transaction.infrastructure.adapter.in.api;
 
-import com.alexiae.kafka.transaction.application.usecases.CreateTransactionService;
-import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedRequest;
-import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedResponse;
+import com.alexiae.kafka.transaction.domain.port.in.CreateTransactionUseCase;
+import com.alexiae.kafka.transaction.application.dto.TransactionInitiatedRequest;
+import com.alexiae.kafka.transaction.application.dto.TransactionInitiatedResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
 
     @Autowired
-    private CreateTransactionService createTransactionService;
+    private CreateTransactionUseCase createTransactionService;
 
     @PostMapping("/deposit")
     public TransactionInitiatedResponse deposit(@RequestBody TransactionInitiatedRequest request,

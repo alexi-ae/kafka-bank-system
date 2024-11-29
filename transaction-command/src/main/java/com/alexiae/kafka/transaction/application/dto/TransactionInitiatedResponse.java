@@ -1,4 +1,4 @@
-package com.alexiae.kafka.transaction.domain.dto;
+package com.alexiae.kafka.transaction.application.dto;
 
 import lombok.Builder;
 import lombok.Getter;

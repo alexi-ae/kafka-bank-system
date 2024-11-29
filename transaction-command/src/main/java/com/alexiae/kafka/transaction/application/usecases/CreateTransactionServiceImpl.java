@@ -1,21 +1,21 @@
-package com.alexiae.kafka.transaction.application.usecases.impl;
+package com.alexiae.kafka.transaction.application.usecases;
 
 import com.alexiae.kafka.transaction.application.mapper.TransactionMapper;
 import com.alexiae.kafka.transaction.application.port.out.TransactionEventProducer;
-import com.alexiae.kafka.transaction.application.usecases.CreateTransactionService;
-import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedRequest;
-import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedResponse;
+import com.alexiae.kafka.transaction.domain.port.in.CreateTransactionUseCase;
+import com.alexiae.kafka.transaction.application.dto.TransactionInitiatedRequest;
+import com.alexiae.kafka.transaction.application.dto.TransactionInitiatedResponse;
 import com.alexiae.kafka.transaction.domain.enums.MovementType;
 import com.alexiae.kafka.transaction.domain.event.DepositTransactionEvent;
 import com.alexiae.kafka.transaction.domain.model.Transaction;
 import com.alexiae.kafka.transaction.domain.model.TransactionMovement;
-import com.alexiae.kafka.transaction.domain.port.TransactionMovementsPersistencePort;
-import com.alexiae.kafka.transaction.domain.port.TransactionPersistencePort;
+import com.alexiae.kafka.transaction.domain.port.out.TransactionMovementsPersistencePort;
+import com.alexiae.kafka.transaction.domain.port.out.TransactionPersistencePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateTransactionServiceImpl implements CreateTransactionService {
+public class CreateTransactionServiceImpl implements CreateTransactionUseCase {
 
     @Autowired
     private TransactionPersistencePort transactionPersistencePort;

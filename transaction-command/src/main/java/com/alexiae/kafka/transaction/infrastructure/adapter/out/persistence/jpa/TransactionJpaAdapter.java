@@ -1,7 +1,7 @@
 package com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.transaction.domain.model.Transaction;
-import com.alexiae.kafka.transaction.domain.port.TransactionPersistencePort;
+import com.alexiae.kafka.transaction.domain.port.out.TransactionPersistencePort;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.entity.TransactionEntity;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.mapper.TransactionEntityMapper;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.repository.TransactionRepository;

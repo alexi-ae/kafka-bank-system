@@ -1,7 +1,7 @@
 package com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa;
 
 import com.alexiae.kafka.transaction.domain.model.TransactionMovement;
-import com.alexiae.kafka.transaction.domain.port.TransactionMovementsPersistencePort;
+import com.alexiae.kafka.transaction.domain.port.out.TransactionMovementsPersistencePort;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.entity.TransactionMovementEntity;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.mapper.TransactionMovementEntityMapper;
 import com.alexiae.kafka.transaction.infrastructure.adapter.out.persistence.jpa.repository.TransactionMovementsRepository;

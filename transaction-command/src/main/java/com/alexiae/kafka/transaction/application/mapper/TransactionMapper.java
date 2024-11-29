@@ -1,6 +1,6 @@
 package com.alexiae.kafka.transaction.application.mapper;
 
-import com.alexiae.kafka.transaction.domain.dto.TransactionInitiatedRequest;
+import com.alexiae.kafka.transaction.application.dto.TransactionInitiatedRequest;
 import com.alexiae.kafka.transaction.domain.model.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

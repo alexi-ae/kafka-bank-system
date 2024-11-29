@@ -1,5 +1,3 @@
 spring:
-  application:
-    name: account-command
-  config:
-    import: optional:configserver:http://config-server:9000
+  profiles:
+    active: local

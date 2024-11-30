@@ -8,8 +8,9 @@ Sistema de Transferencias de Dinero en Tiempo Real
 2. [Problema](#Problema)
 3. [Objetivo](#Objetivo)
 4. [Solución](#Solución)
-5. [Deploy](#deploy)
-6. [Autor](#autor)
+5. [Deploy](#Deploy)
+6. [Tecnologías_Utilizadas](#Tecnologías_Utilizadas)
+6. [Autor](#Autor)
 
 ## Antecedente
 En el sector financiero, la digitalización de procesos es fundamental para garantizar una experiencia de usuario eficiente, segura y confiable. Actualmente, las entidades requieren soluciones tecnológicas que no solo permitan la gestión de usuarios y cuentas, sino que también cumplan con estrictos estándares de seguridad, escalabilidad y facilidad de uso.
@@ -111,6 +112,7 @@ Infraestructura Tecnológica:
 ![Solución-Arquitectura](./Arquitectura-Spring-Cloud.svg)
 
 ---
+
 # Deploy
 ## Requisitos previos
 Antes de realizar el despliegue de kafka-bank-system:
@@ -186,7 +188,7 @@ Si todo esta bien, tendrias que tener una respuesta como:
 ```
 ---
 
-## Tecnologías Utilizadas
+# Tecnologías_Utilizadas
 
 ### Lenguaje de Programación
 - Java
